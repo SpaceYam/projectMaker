@@ -1,9 +1,4 @@
-# projectMaker
-
-<h1 align="center">
-  Project Maker simulator
-  <img src="" alt=""> 
-</h1>
+# Project Maker simulator
 
 &nbsp;
 ## About this ##
