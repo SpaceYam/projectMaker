@@ -1,0 +1,38 @@
+{
+    "content1": {
+        "title": "Intro",
+        "route": "./projectMaker.html", 
+        "subs": [
+            { "title": "성향 알아보기", "route": "./projectMaker.html" }
+        ]
+    },
+    "content2": {
+        "title": "FE",
+        "route": "./decideCssf.html", 
+        "subs": [
+            { "title": "CSS 프레임워크 정하기", "route": "./decideCssf.html" },
+            { "title": "HTML 레이아웃 정하기", "route": "./decideLayout.html" }
+        ]
+    },
+    "content3": {
+        "title": "BE",
+        "route": "./", 
+        "subs": [
+            { "title": "BE 생성하기", "route": "./" }
+        ]
+    },
+    "content4": {
+        "title": "형상관리",
+        "route": "./", 
+        "subs": [
+            { "title": "FE/BE GIT에 올리기", "route": "./" }
+        ]
+    },
+    "content5": {
+        "title": "배포",
+        "route": "./", 
+        "subs": [
+            { "title": "프로젝트 배포하기", "route": "./" }
+        ]
+    }
+}
