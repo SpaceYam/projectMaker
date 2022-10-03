@@ -99,44 +99,7 @@
 <body>
     
     <aside>
-        <ol>
-            <li class="depth1">Intro)</li>
-            <li class="depth2">
-                <ol>
-                    <li><a href="./index.html">1. 성향 알아보기</a></li>
-                    <li></li>
-                </ol>
-            </li>
-            <li class="depth1">FE)</li>
-            <li class="depth2">
-                <ol>
-                    <li><a href="./decideCssf.html">2. CSS 프레임워크 정하기</a></li>
-                    <li><a href="./decideLayout.html">3. HTML 레이아웃 정하기</a></li>
-                    <li></li>
-                </ol>
-            </li>
-            <li class="depth1">BE)</li>
-            <li class="depth2">
-                <ol>
-                    <li>4. BE 생성하기</li>
-                    <li></li>
-                </ol>
-            </li>
-            <li class="depth1">형상관리)</li>
-            <li class="depth2">
-                <ol>
-                    <li>5. FE/BE GIT에 올리기</li>
-                    <li></li>
-                </ol>
-            </li>
-            <li class="depth1">배포)</li>
-            <li class="depth2">
-                <ol>
-                    <li>6. 프로젝트 배포하기</li>
-                    <li></li>
-                </ol>
-            </li>
-        </ol>
+        <ol></ol>
     </aside>
     <section>
         <p><h2 class='gradient'>HTML 레이아웃 정하기</h2></p>
@@ -152,13 +115,31 @@
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString).entries();
         let getParam = Object.fromEntries(urlParams); console.log('queryString:', getParam);
+        if(getParam.site===undefined) window.location.search = '?site=';
 
         window.onload = ()=>{
 
-            /*
-            ajax_get('./data/test.json', (data)=>{ console.log(data); //console.log(JSON.stringify(data, null, 4));
-            }); */
-        };
+            ajax_get('./data/routes.json', (data)=>{ console.log(data); //console.log(JSON.stringify(data, null, 4));
+                let menuobj = data, menulist;
+                menulist = Object.entries(menuobj); console.log('menulist:', menulist);
+                menulist.map((itm, idx)=>{ 
+                    const key = itm[0], value = itm[1]; console.log('menu:', key, value);
+                    if(String(getParam.site)==='static' && String(value.title)==='BE') {}
+                    else {
+                        document.querySelector('aside ol').innerHTML+=`
+                            <li class="depth1">${value.title})</li>
+                            <li class="depth2">
+                                <ol>
+                                    ${value.subs.map((_itm, _idx)=>
+                                        String(`<li><a href="${_itm.route}">${(idx+1)+_idx}. ${_itm.title}</a></li>`)
+                                    )}
+                                </ol>
+                            </li>
+                        `.replaceAll(',','');
+                    }
+                });
+            });
+        }
 
         function ajax_get(url, callback) {
             var xmlhttp = new XMLHttpRequest();
