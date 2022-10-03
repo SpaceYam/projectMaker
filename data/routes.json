@@ -25,7 +25,7 @@
         "title": "형상관리",
         "route": "./", 
         "subs": [
-            { "title": "FE/BE GIT에 올리기", "route": "./" }
+            { "title": "FE/BE GIT에 올리기", "route": "./uploadToGit.html" }
         ]
     },
     "content5": {
@@ -39,7 +39,7 @@
         "title": "기타 유틸",
         "route": "./", 
         "subs": [
-            { "title": "이미지 base64로 변환", "route": "./" }
+            { "title": "이미지 base64로 변환", "route": "./convertBase64.html" }
         ]
     }
 }
