@@ -1,0 +1,78 @@
+{
+    "bootstrap": {
+        "cdn": "https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css",
+        "html": "<input type='text' class='form-control' placeholder='Some text'><button class='btn btn-outline-primary' type='button'>bootstrap</button>"
+    },
+    "foundation": {
+        "cdn": "https://cdn.jsdelivr.net/foundation/6.2.4/foundation.min.css",
+        "html": "<input type='text' /><button class='hollow button' href='#'>foundation</button>"
+    },
+    "bluma": {
+        "cdn": "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css",
+        "html": "<input class='input' type='text' placeholder='Text input'><button class='button'>bluma</button>"
+    }, 
+    "tailwind": {
+        "cdn": "https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css",
+        "html": "<input class='shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='username' type='text' placeholder='Username'><button class='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>tailwindcss</button>"
+    },
+    "uiKit": {
+        "cdn": "https://cdn.jsdelivr.net/npm/uikit@3.15.8/dist/css/uikit.min.css",
+        "html": "<input class='uk-input' type='text' /><button class='uk-button uk-button-default'>ui-kit</button>"
+    },
+    "milligram": {
+        "cdn": "https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css",
+        "html": "<input type='text' /><button class='button button-outline'>milligram</button>"
+    }, 
+    "pure": {
+        "cdn": "https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css",
+        "html": "<form class='pure-form'><input type='text' /></form><button class='pure-button'>pure</button>"
+    },
+    "tachyons": {
+        "cdn": "https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.11.1/tachyons.min.css",
+        "html": "<div class='measure'><input class='input-reset ba b--black-20 pa2 mb2 db w-100' type='text' /><button class='gray pv2 ph3 bg-transparent ba b--gray hover-bg-gray hover-white'>tachyons</button></div>"
+    },
+    "materialize": {
+        "cdn": "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css",
+        "html": "<input id='password' type='password' class='validate' /><button class='btn waves-effect waves-light'>materialize</button>"
+    },
+    "skeleton": {
+        "cdn": "https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css",
+        "html": "<input type='text' /><button>skeleton</button>"
+    },
+    "pico": {
+        "cdn": "https://cdn.jsdelivr.net/npm/@picocss/pico@1.5.3/css/pico.min.css",
+        "html": "<input type='text'><button>pico</button>"
+    },
+    "semanticUI": {
+        "cdn": "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css",
+        "html": "<form class='ui form'><input type='text'><button class='ui button'>semantic-ui</button></form>"
+    },
+    "primer": {
+        "cdn": "https://unpkg.com/@primer/css@^20.2.4/dist/primer.css",
+        "html": "<input type='text' class='form-control' /><button class='btn'>primer</button>"
+    },
+    "tacit":  {
+        "cdn": "https://cdn.jsdelivr.net/gh/yegor256/tacit@gh-pages/tacit-css-1.5.5.min.css",
+        "html": "<input type='text' /><button type='submit'>tacit</button>"
+    },
+    "baseguide":  {
+        "cdn": "https://cdnjs.cloudflare.com/ajax/libs/baseguide/4.2.0/css/baseguide.min.css",
+        "html": "<input type='text' /><button class='btn' type='submit'>baseguide</button>"
+    },
+    "siimple": {
+        "cdn": "https://cdn.jsdelivr.net/npm/siimple/siimple.css",
+        "html": "<input class='input' /><button class='button'>siimple</button>"
+    },
+    "concise": {
+        "cdn": "https://cdn.concisecss.com/concise.min.css",
+        "html": "<input /><button>concise</button>"
+    },
+    "metroui": {
+        "cdn": "https://cdn.korzh.com/metroui/v4.5.1/css/metro-all.min.css",
+        "html": "<input /><button class='button light'>metroui</button>"
+    },
+    "pollen": {
+        "cdn": "https://unpkg.com/pollen-css",
+        "html": "<button style='font-family: var(--font-sans); font-size: var(--scale-00); font-weight: var(--weight-medium);  line-height: var(--line-none); padding: var(--size-3) var(--size-5); background: var(--color-blue); border-radius: var(--radius-xs); color: white;'>Button</button>"
+    }
+}
