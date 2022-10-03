@@ -119,9 +119,9 @@
 
         window.onload = ()=>{
 
-            ajax_get('./data/routes.json', (data)=>{ console.log(data); //console.log(JSON.stringify(data, null, 4));
+            ajax_get('./data/routes.json', (data)=>{ console.log('menus:', data); //console.log(JSON.stringify(data, null, 4));
                 let menuobj = data, menulist;
-                menulist = Object.entries(menuobj); //console.log('menulist:', menulist);
+                menulist = Object.entries(menuobj); 
                 menulist.map((itm, idx)=>{ 
                     const key = itm[0], value = itm[1]; //console.log('menu:', key, value);
                     if(String(getParam.site)==='static' && String(value.title)==='BE') {}
