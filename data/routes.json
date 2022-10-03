@@ -1,9 +1,9 @@
 {
     "content1": {
         "title": "Intro",
-        "route": "./projectMaker.html", 
+        "route": "./index.html", 
         "subs": [
-            { "title": "성향 알아보기", "route": "./projectMaker.html" }
+            { "title": "성향 알아보기", "route": "./index.html" }
         ]
     },
     "content2": {
