@@ -121,9 +121,9 @@
 
             ajax_get('./data/routes.json', (data)=>{ console.log(data); //console.log(JSON.stringify(data, null, 4));
                 let menuobj = data, menulist;
-                menulist = Object.entries(menuobj); console.log('menulist:', menulist);
+                menulist = Object.entries(menuobj); //console.log('menulist:', menulist);
                 menulist.map((itm, idx)=>{ 
-                    const key = itm[0], value = itm[1]; console.log('menu:', key, value);
+                    const key = itm[0], value = itm[1]; //console.log('menu:', key, value);
                     if(String(getParam.site)==='static' && String(value.title)==='BE') {}
                     else {
                         document.querySelector('aside ol').innerHTML+=`
@@ -152,7 +152,7 @@
                     "html": "<input type='text' class='form-control' /><button class='btn' >halfmoon</button>"
                 };*/
                 
-                cssflist = Object.entries(cssfobj); console.log('cssflist:', cssflist);
+                cssflist = Object.entries(cssfobj); //console.log('cssflist:', cssflist);
                 cssflist.map((itm)=>{ 
                     const key = itm[0], value = itm[1]; //console.log('cssf:', key, value); 
                     const newDiv = document.createElement("div");
