@@ -34,5 +34,12 @@
         "subs": [
             { "title": "프로젝트 배포하기", "route": "./" }
         ]
+    },
+    "content6": {
+        "title": "기타 유틸",
+        "route": "./", 
+        "subs": [
+            { "title": "이미지 base64로 변환", "route": "./" }
+        ]
     }
 }
