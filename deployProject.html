@@ -81,6 +81,7 @@
         }
 
         .gradient {
+            font-weight: lighter;
             margin-bottom: 20px;font-size: 24pt;
             background-image: linear-gradient(90deg, rgba(94,114,235,1) 0%, rgba(255,145,144,1) 56%, rgba(254,193,149,1) 100%);
             color: transparent;
@@ -94,55 +95,24 @@
             }
         }
     </style>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css' /> 
-    <style>
-        #gitAddr {width:88%;}
-    </style>
+    <style></style>
 </head>
 <body>
     
-<aside>
-    <ol></ol>
-</aside>
-
-<section>
-<p><h2 class='gradient'>개발한 소스 깃에 올리기(버전관리)</h2></p>
-<div id=''></div>
-<div id=''></div>
-<div id='content1' class='content'>
-1. 프로젝트에 .gitignore 파일을 생성하고 형상관리에서 제외할 파일/폴더 들을 등록합니다.
-<br />ex) node_modules, build 등 빌드 파일, 불필요한 .log 파일 등
-<br /><br />
-2. 새 깃 Repo를 생성 후에 Repo의 https 주소를 복사합니다.
-<br /><br />
-<img src='./assets/git.png' height='200'/>
-<br /><br />
-3. 입력창에 깃주소를 입력하고, 프로젝트의 디렉토리에서 다음 CLI를 터미널에 실행합니다.
-&nbsp; <input id='gitAddr' type='text' oninput='setGitCommand(this.value)'/> 
-<br />
-<pre>
-git init
-git add -A .
-git commit -m 'initial commit'
-git remote add origin <span id='gitUrl'></span>
-git push -u origin master
-</pre>
-4. Repo를 클론/스테이징/커밋 하여 프로젝트를 관리합니다. 
-<a href='https://www.sourcetreeapp.com/'>소스트리</a>, <a href='https://desktop.github.com/'>깃데스크톱</a> 
-등의 <br />Git-GUI를 활용하여 프로젝트의 히스토리를 시각적으로 확인할 수도 있습니다.
-</div>
-</section>
-
-<footer>
-    by Space Yam
-</footer>
+    <aside>
+        <ol></ol>
+    </aside>
+    <section>
+        <p><h2 class='gradient'>프로젝트 배포하기</h2></p>
+        <div id=''></div>
+        <div id=''></div>
+        <div id='content1' class='content'></div>
+    </section>
+    <footer>
+        by Space Yam
+    </footer>
         
     <script>
-      
-        function setGitCommand(gitUrl) {
-            document.getElementById('gitUrl').innerHTML = gitUrl;
-        }
-
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString).entries();
         let getParam = Object.fromEntries(urlParams); console.log('queryString:', getParam);

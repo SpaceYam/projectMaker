@@ -32,10 +32,17 @@
         "title": "배포",
         "route": "./", 
         "subs": [
-            { "title": "프로젝트 배포하기", "route": "./" }
+            { "title": "프로젝트 배포하기", "route": "./deployProject.html" }
         ]
     },
     "content6": {
+        "title": "서비스 구체화하기",
+        "route": "./", 
+        "subs": [
+            { "title": "프로젝트 명세 정리", "route": "./defineDetails.html" }
+        ]
+    },
+    "content7": {
         "title": "기타 유틸",
         "route": "./", 
         "subs": [

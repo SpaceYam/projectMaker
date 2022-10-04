@@ -16,6 +16,7 @@
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Slabo'>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Amatic SC'>
     <style>
+        @import url('https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css');
 
         @media (max-width: 575px) {
         }
@@ -28,24 +29,28 @@
         @media (min-width: 1200px) {
         }
 
-        * {margin:0; padding:0;}
+        * {margin:0;padding:0; box-sizing:border-box;}
         html, body { width:100%; height:100%; }
         #root, .App, .container {width:100%;height:100%;}
         .container {background-color:#393936}
 
+        p span {font-size:14px}
         .poster {left: 10%;top: 8%;height: 80%;width: 80%;position: relative;}
-        .title {left: 17px;top: 30px;z-index:1;
-            color:grey;position: relative;font-size:50pt;font-family: 'Lobster', sans-serif;}
+        .title {left: 17px;top: 30px;z-index:1;text-shadow: 2px 2px 5px gray;
+            position: relative;font-size:50pt;font-family: 'Lobster', sans-serif;}
         .title .topword {position: absolute;}
-        .title .btmword {position: absolute;top: 65px;left: 30px;}
-        .mascot, .office {max-width: 980px;width: 100%;height: 100%;position: relative;}
-        .office {max-width: 980px;max-height: 715px;width: 100%;position: relative;}
+        .title .btmword {position: absolute;top: 75px;left: 30px;}
+        .version {font-size:20px;left: 90px;top:158px;position: absolute;}
+        .mascot, .place {max-width: 980px;width: 100%;height: 100%;position: relative;}
+        .place {max-width: 980px;max-height: 715px;width: 100%;position: relative;}
         /* background: url('./office.jpg') center center no-repeat; */
         .pressStart {bottom: 30px;left: 33%;z-index:2;
             color: white;font-size: 35px;font-weight: 600;font-family: 'Slabo', sans-serif;position: absolute;
-            text-shadow: -1px -1px 0 rgb(255, 0, 200), 1px -1px 0 rgb(255, 0, 200), -1px 1px 0 rgb(255, 0, 200), 1px 1px 0 rgb(255, 0, 200);
+            text-shadow: -1px -1px 0 rgb(255, 0, 200), 1px -1px 5px rgb(255, 0, 200), -1px 1px 0 rgb(255, 0, 200), 1px 1px 0 rgb(255, 0, 200);
         }
         .pressStart span {color: black;font-size: 20px;text-shadow:none}
+        .commercial {color: grey;font-size: 20px;font-family: 'Lobster', sans-serif;}
+        .commercial span {margin-left:5px;font-size: 12px;font-family: 'Slabo', sans-serif}
 
         .portrait {left: 45%;bottom: 0px;height: 300px;position: absolute;}
         #smile {height: 100%;position: absolute;}
@@ -57,7 +62,109 @@
         #speach {}
         #choices {margin-top: 20px;}
         .choice {}
+        #answer {padding:8px}
+        #answer input {display: inline-block;width: 120px;padding: 3px 5px;margin: 12px 0 0 8px;}
 
+        #gameover1 {
+            top:70px;left: 38%;
+            font-weight: 700;color: wheat;font-family: 'Amatic SC', sans-serif;position: absolute;
+        }
+        #gameover1 .topword {font-size: 150pt;position: absolute;}
+        #gameover1 .btmword {font-size: 150pt;position: absolute;top: 200px;left: 30px;}
+        #gameover1 .gofront {cursor:pointer;top: 480px;left: 60px;font-size: 30pt;width: 300px;position: absolute;}
+        
+        #gameover2 {
+            top:130px;left: 35%;
+            color: wheat;font-family: 'Galmuri9', sans-serif;position: absolute;
+        }
+        #gameover2 .topword {text-shadow: 0px 20px 50px gray;font-size: 24pt;width: 420px;position: absolute;}
+        #gameover2 .btmword {text-shadow: 0px 20px 50px gray;font-size: 85pt;top: 150px;width: 500px;position: absolute;}
+        #gameover2 .gofront {text-shadow: 0px 20px 50px gray;font-size: 30pt;cursor: pointer;top: 410px;left: 60px;width: 300px;position: absolute;}
+
+        .gwanlamga {
+            bottom: -35px;
+            right: 3%;
+            width: 175px;
+            padding: 0 0 0 35px;
+            font-size: 70pt;
+            font-weight: 900;
+            background-color: rgb(20, 104, 179);
+            color: white;
+            text-shadow: grey -13px 0px 0px;
+            border: 10px solid black;
+            border-radius: 10px;
+            z-index: 1;
+            position: absolute;
+
+        }
+        .gwanlamga div { 
+            left: -40px;
+            bottom: -10px;
+            width: 170px;
+            padding: 0;
+            font-size: 13pt;
+            background-color: black;
+            text-shadow: none;
+            border-radius: 0;
+            position: relative;
+            text-align: center;
+        }
+    </style>
+    <style>
+        .shiny {
+            background: linear-gradient(to right, hsl(0, 0%, 30%) 0, hsl(0, 0%, 100%) 10%, hsl(0, 0%, 30%) 20%);
+            -webkit-background-clip: text;
+            animation: shine 3s infinite linear;
+        }
+
+        @keyframes shine {
+            0% {
+                background-position: 0;
+            }
+            60% {
+                background-position: 600px;
+            }
+            100% {
+                background-position: 600px;
+            }
+        }
+
+        .glow {
+            color: #ff0080;
+            text-align: center;
+            -webkit-animation: glow 1s ease-in-out infinite alternate;
+            -moz-animation: glow 1s ease-in-out infinite alternate;
+            animation: glow 1s ease-in-out infinite alternate;
+        }
+        @-webkit-keyframes glow {
+            from {
+                text-shadow: 
+                0 0 10px #fff, 
+                0 0 20px #fff, 
+                0 0 30px #e60073, 
+                0 0 40px #e60073;
+            }
+            to {
+                text-shadow: 
+                0 0 20px #fff, 
+                0 0 30px #ff4da6, 
+                0 0 40px #ff4da6, 
+                0 0 50px #ff4da6;
+            }
+        }
+    </style>
+    <style>
+        .blink_me {
+            animation: blinker 1s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+    <style>
         .bubble {
             position: absolute;
             bottom: 295px;
@@ -65,7 +172,7 @@
             font-family: sans-serif;
             font-size: 18px;
             line-height: 24px;
-            width: 220px;
+            width: 250px;
             background: #fff;
             border-radius: 15px;
             padding: 24px;
@@ -97,42 +204,90 @@
             margin: 4px 2px;
             cursor: pointer;
         }
-
-        #gameover {
-            top:70px;left: 38%;
-            font-weight: 700;color: wheat;font-family: 'Amatic SC', sans-serif;position: absolute;
+    </style>
+    <style>
+        header {
+            -o-transition-duration: 0.3s;
+            -moz-transition-duration: 0.3s;
+            -webkit-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+            padding:  0px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #333;
+            border-bottom: 3px solid #dad;
         }
-        #gameover .topword {font-size: 150pt;position: absolute;}
-        #gameover .btmword {font-size: 150pt;position: absolute;top: 200px;left: 30px;}
-        #gameover .gofront {cursor:pointer;top: 480px;left: 60px;font-size: 30pt;width: 300px;position: absolute;}
-        
-        .gwanlamga {
-            bottom: -35px;
-            right: 3%;
-            width: 145px;
-            padding: 0 0 0 35px;
-            font-size: 70pt;
-            font-weight: 900;
-            background-color: rgb(20, 104, 179);
-            color: white;
-            text-shadow: grey -13px 0px 0px;
-            border: 10px solid black;
-            border-radius: 10px;
-            z-index: 1;
+        /* GRADIEND */
+        .ap {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            height: 40px;
+            margin: auto;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            color: #333;
+            background: #222;
+            border-top: 2px solid #f0f;
+            z-index: 9999;
+        }  
+        /*END*/
+
+        body {
+            background: radial-gradient(ellipse at top left, #3b3b3b 0%, #000000 100%);
+            overflow: hidden;
+        }
+
+        .credits {
             position: absolute;
-
-        }
-        .gwanlamga div { 
-            left: -40px;
-            bottom: -10px;
-            width: 170px;
-            padding: 0;
-            font-size: 13pt;
-            background-color: black;
-            text-shadow: none;
-            border-radius: 0;
-            position: relative;
+            top: 100%;
+            left: 50%;
+            width: 400px;
+            margin-left: -200px;
+            font: 300 30px/1 'Open Sans Condensed', sans-serif;
             text-align: center;
+            text-transform: uppercase;
+            color: #fff;
+            animation: 60s credits linear infinite;
+        }
+
+        .banner {
+            text-shadow: 10px 10px 25px gray;
+            font-family: 'Lobster', sans-serif;
+            margin-bottom: 50px;
+            font-size: 58px;
+        }
+
+        .job {
+            font-family: 'Galmuri9', sans-serif;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .name {
+            margin-bottom: 50px;
+            font-size: 35px;
+        }
+
+        .ment {
+            font-family: 'Galmuri9', sans-serif;
+            margin-bottom: 50px;
+            font-size: 30px;
+        }
+
+        @keyframes credits {
+            0% {
+                top: 100%;
+            }
+            100% {
+                top: -500%;
+            }
         }
     </style>
 </head>
@@ -157,9 +312,10 @@
                 <ReactRouterDOM.HashRouter history={browserHistory}>
                     <Switch>
                         <Route path='/' component={Page1} exact />
-                        <Route path='/1' component={Page2} />
-                        <Route path='/2' component={Page3} />
-                        <Route path='/gameover' component={GameOver} />
+                        <Route path='/decision' component={Page2} />
+                        <Route path='/design' component={Page3} />
+                        <Route path='/gameover' component={GameOver} />Credits
+                        <Route path='/credits' component={Credits} />
                     </Switch>
                 </ReactRouterDOM.HashRouter>
             </div>
@@ -174,20 +330,23 @@
                 <React.Fragment> 
                 <div class='container' tabindex='1' //style={{backgroundColor:'black'}}
                     onClick={()=>{
-                        props.history.push({ pathname:'/1', state:{  } });
+                        props.history.push({ pathname:'/decision', state:{  } });
                     }}
                     onKeyPress={(e)=>{ console.log(e);
-                        if(e.key==='Enter') props.history.push({ pathname:'/1', state:{  } });
+                        if(e.key==='Enter') props.history.push({ pathname:'/decision', state:{  } });
                     }}>
                     <div class='poster'>
-                        <p style={{marginBottom:'10px',color:'white'}}>미(정의) 프(로젝트) 시(뮬레이션)</p>
-                        <div class='title'>
-                            <p class='topword'>Project</p>
-                            <p class='btmword'>Maker</p>
+                        <p style={{marginBottom:'10px',color:'white'}}>
+                            <span>예정하시는 프로젝트를 빠르게 정의하세요.</span> 미(정의) 프(로젝트) 시(뮬레이션)</p>
+                        <div class='title glow'>
+                            <p class='topword '>Project</p>
+                            <p class='btmword '>Maker</p>
+                            <p class='version'>ver.1</p>
                         </div>
                         <img class='mascot' src='https://drive.google.com/uc?export=view&id=1J_BzfKVFFcXmsGWPoqqO7mjpVu42uR55' />
-                        <p class='pressStart'>PRESS START<span>(ENTER)</span></p>
-                        <div class="gwanlamga" >1~<div class="gwanlamga" >1년차 이상 이용가</div></div>
+                        <p class='pressStart blink_me'>PRESS START<span>(ENTER)</span></p>
+                        <div class='gwanlamga' >1~<div class='gwanlamga' >1년차 이상 이용가</div></div>
+                        <p class='commercial'>PaaS Maker<span>comming soon</span></p>
                     </div>
                 </div>
                 </React.Fragment>
@@ -197,11 +356,42 @@
                 </React.Fragment>); 
             };
 
+            function initStates() {
+                document.getElementById('man').style.display='block';
+                document.getElementById('man').style.opacity=1;
+                document.getElementById('speach').innerHTML=``;
+                document.getElementById('bubble').style.display='none'; 
+                document.getElementById('yes').innerHTML = '응';
+                document.getElementById('no').innerHTML = '아니';
+                document.getElementById('choices').style.display='none'; 
+                document.getElementById('smile').style.zIndex=2;
+                document.getElementById('talk').style.zIndex=1;
+                document.getElementById('bijang').style.zIndex=1;
+                document.getElementById('supur').style.zIndex=1;
+                document.getElementById('jungs').style.zIndex=1;
+            }
+
+            function setChoices(yesAnswer, noAnswer) {
+                document.getElementById('choices').style.display='block'; 
+                document.getElementById('yes').innerHTML = yesAnswer;
+                document.getElementById('no').innerHTML = noAnswer;
+            }
+
+            function disappointing(props, zindex) {
+                document.getElementById('choices').style.display='none'; 
+                document.getElementById('speach').innerHTML=`
+                    아쉽구만... 
+                `;
+                document.getElementById('jungs').style.zIndex=zindex;
+                setTimeout(()=>{ props.history.push({ pathname:'/gameover', state:{  } }); }, 2500);
+            }
+
             function Page2 (props) {
                 useEffect(()=>{
+                    initStates();
                     loadPlot();
                 },[])
-
+                
                 function loadPlot() {
                     setTimeout(()=>{ document.getElementById('smile').style.zIndex=1; }, 0);
                     setTimeout(()=>{ document.getElementById('talk').style.zIndex=1; }, 300);
@@ -214,7 +404,7 @@
                             <br/>프로젝트를 만든다고?
                         `; }, 450);
                     setTimeout(()=>{ 
-                        document.getElementById('choices').style.display='block'; 
+                        setChoices('응', '아니');
                         document.getElementById('yes').addEventListener('click', 
                             ()=>{ document.getElementById('choices').style.display='none'; 
                                   document.getElementById('supur').style.zIndex=3;
@@ -224,15 +414,34 @@
                                     <br/>준비한다는 사실에 
                                     <br/>벌써 설레인다네
                                  `;
+
+                                 setTimeout(()=>{ 
+                                    document.getElementById('talk').style.zIndex=4; 
+                                    document.getElementById('speach').innerHTML=`
+                                        그러면 어서   
+                                        <br/>프로젝트를 위한
+                                        <br/>준비를 하러가세!
+                                    `;
+                                    setChoices('콜', '아무래도 아직은...');
+                                    document.getElementById('no').addEventListener('click', 
+                                        ()=> disappointing(props, 4) );
+                                    document.getElementById('yes').addEventListener('click', 
+                                        ()=> { document.getElementById('choices').style.display='none';
+                                            document.getElementById('speach').innerHTML=`고고~`;
+                                            setTimeout(()=>{ initStates(); }, 2000);
+                                            setTimeout(()=>{ document.getElementById('man').style.opacity=0.8; }, 2200);
+                                            setTimeout(()=>{ document.getElementById('man').style.opacity=0.6; }, 2300);
+                                            setTimeout(()=>{ document.getElementById('man').style.opacity=0.4; }, 2400);
+                                            setTimeout(()=>{ document.getElementById('man').style.opacity=0; }, 2500);
+                                            setTimeout(()=>{ 
+                                                props.history.push({ pathname:'/design', state:{  } }); 
+                                            }, 3500);
+                                        });
+                                    
+                                 }, 2800);
                             });
                         document.getElementById('no').addEventListener('click', 
-                            ()=>{ document.getElementById('choices').style.display='none'; 
-                                  document.getElementById('speach').innerHTML=`
-                                    그렇구만... ㅎ
-                                  `;
-                                  document.getElementById('jungs').style.zIndex=2;
-                                  setTimeout(()=>{ props.history.push({ pathname:'/gameover', state:{  } }); }, 1500);
-                            });
+                            ()=> disappointing(props, 2) );
                         
                     }, 550);
                 }
@@ -241,15 +450,18 @@
                 <React.Fragment> 
                 <div class='container' style={{textAlign:'center'}}
                 >   
-                    <img class='office' src='https://drive.google.com/uc?export=view&id=1PSjPXLzzfAZAno9gAsWqDN-Lz8XppNtY' />
+                    <img class='place' src='https://drive.google.com/uc?export=view&id=1cY8nECtm2a-yxiB5aKHPhk8VZvif8UWA' />
                     <div id='bubble' class='bubble bubble-bottom-left' style={{display:'none'}}>
                         <span id='speach'></span>
                         <div id='choices' style={{display:'none'}}> 
-                            <button id='yes' class='choice' style={{backgroundColor:'red'}}>예</button> 
-                            <button id='no' class='choice' style={{backgroundColor:'green'}}>아니오</button> 
+                            <button id='yes' class='choice' style={{backgroundColor:'green'}}>응</button> 
+                            <button id='no' class='choice' style={{backgroundColor:'red'}}>아니</button> 
+                        </div>
+                        <div id='answer' style={{display:'none'}} >
+                            답변:<input type='text' />
                         </div>
                     </div>
-                    <div class='portrait'>
+                    <div id='man' class='portrait'>
                         <img id='smile' src='https://drive.google.com/uc?export=view&id=1_gDtVk6gyQSrHtYHUxZofHA7aJ43rCFx' />
                         <img id='talk' src='https://drive.google.com/uc?export=view&id=1E9JKuDgmsD-TTdGE_nJGAMTm_r9uPCxg' />
                         <img id='supur' src='https://drive.google.com/uc?export=view&id=1oGo09-FZwb6hmgqhEBaPpcJa4JvXX9El' />
@@ -265,11 +477,119 @@
             };
 
             function Page3 (props) {
+                useEffect(()=>{
+                    initStates();
+                    loadPlot();
+                },[])
+
+                function loadPlot() {
+                    setTimeout(()=>{ document.getElementById('smile').style.zIndex=1; }, 0);
+                    setTimeout(()=>{ document.getElementById('talk').style.zIndex=1; }, 300);
+                    setTimeout(()=>{ document.getElementById('bijang').style.zIndex=2; }, 400);
+
+                    setTimeout(()=>{ document.getElementById('bubble').style.display='block'; }, 450);
+                    setTimeout(()=>{ 
+                        document.getElementById('speach').innerHTML=`
+                            정말 환상적이야!
+                        `; }, 450);
+                    setTimeout(()=>{ 
+                        document.getElementById('talk').style.zIndex=3;
+                        document.getElementById('speach').innerHTML=`
+                            프로젝트는 
+                            <br/>누구를 대상으로 
+                            <br/>서비스 할텐가?
+                        `; 
+                        document.getElementById('answer').style.display='block'; 
+                        document.getElementById('answered').addEventListener('blur', 
+                            ()=> {
+                                document.getElementById('answer').style.display='none';
+                                setTimeout(()=>{ 
+                                    document.getElementById('smile').style.zIndex=4;
+                                    document.getElementById('speach').innerHTML=`
+                                        그거 좋은 생각일세!
+                                    `; }, 450);
+                                    setTimeout(()=>{ 
+                                        document.getElementById('talk').style.zIndex=4;
+                                        document.getElementById('speach').innerHTML=`
+                                            그럼 프로젝트에 데이터 저장이 필요한가?
+                                        `; 
+                                        setChoices('그럴 것 같아~', '필요없어!!');
+                                        document.getElementById('yes').addEventListener('click', 
+                                            ()=>{document.getElementById('choices').style.display='none';
+                                                document.getElementById('bijang').style.zIndex=5;
+                                                document.getElementById('speach').innerHTML=`
+                                                    알겠네~ 그럼 백엔드도 필요하겠군!
+                                                `; 
+                                                let tgCustomers = document.getElementById('answered').value;
+                                                setTimeout(()=>{ exitPlot(tgCustomers, 'static'); }, 5000);
+                                            });
+                                        document.getElementById('no').addEventListener('click', 
+                                            ()=>{document.getElementById('choices').style.display='none';
+                                                document.getElementById('bubble').style.display='none'; 
+                                                setTimeout(()=>{ 
+                                                    document.getElementById('jungs').style.zIndex=5; 
+                                                    }, 450);
+                                                setTimeout(()=>{ 
+                                                    document.getElementById('talk').style.zIndex=6; 
+                                                    document.getElementById('bubble').style.display='block'; 
+                                                    document.getElementById('speach').innerHTML=`
+                                                        고객들에게 시각적인 
+                                                        <br/>표현만 해줄수있는 
+                                                        <br/>정도의 <u>스태틱 사이트</u>가 
+                                                        <br/>괜찮겠군!
+                                                    `; 
+                                                    }, 2300);
+                                                let tgCustomers = document.getElementById('answered').value;
+                                                setTimeout(()=>{ exitPlot(tgCustomers, 'static'); }, 5000);
+                                            });
+
+                                    }, 3200);
+                            });
+
+                        }, 3200);
+
+                        //이제 차차 개발과제들을 정하세
+
+                }
+
+                function exitPlot(forWho, siteMode) {
+                    document.getElementById('speach').innerHTML=`
+                        차차 
+                        <br/>개발과제들을 정하세, 
+                        <br/>우선 날따라 오게나
+                    `;
+                    setTimeout(()=>{ initStates(); }, 2000);
+                    setTimeout(()=>{ document.getElementById('man').style.opacity=0.8; }, 2200);
+                    setTimeout(()=>{ document.getElementById('man').style.opacity=0.6; }, 2300);
+                    setTimeout(()=>{ document.getElementById('man').style.opacity=0.4; }, 2400);
+                    setTimeout(()=>{ document.getElementById('man').style.opacity=0; }, 2500);
+                    setTimeout(()=>{ 
+                        location.href = `./decideCssf.html?forWho=${forWho}&site=${siteMode}`; 
+                    }, 3500);
+                }
+
                 let toRender = 
                 <React.Fragment> 
-                <div class='container'>
-                    <p>Project</p>
-                    <p>Maker</p>
+                <div class='container' style={{textAlign:'center'}}
+                >   
+                    <img class='place' src='https://drive.google.com/uc?export=view&id=1PSjPXLzzfAZAno9gAsWqDN-Lz8XppNtY' />
+                    <div id='bubble' class='bubble bubble-bottom-left' style={{display:'none'}}>
+                        <span id='speach'></span>
+                        <div id='choices' style={{display:'none'}}> 
+                            <button id='yes' class='choice' style={{backgroundColor:'green'}}>응</button> 
+                            <button id='no' class='choice' style={{backgroundColor:'red'}}>아니</button> 
+                        </div>
+                        <div id='answer' style={{display:'none'}} >
+                            답변:<input id='answered' type='text' />
+                        </div>
+                    </div>
+                    <div id='man' class='portrait'>
+                        <img id='smile' src='https://drive.google.com/uc?export=view&id=1_gDtVk6gyQSrHtYHUxZofHA7aJ43rCFx' />
+                        <img id='talk' src='https://drive.google.com/uc?export=view&id=1E9JKuDgmsD-TTdGE_nJGAMTm_r9uPCxg' />
+                        <img id='supur' src='https://drive.google.com/uc?export=view&id=1oGo09-FZwb6hmgqhEBaPpcJa4JvXX9El' />
+                        <img id='bijang' src='https://drive.google.com/uc?export=view&id=1cNC_x49Mjc2mWMUhfdAz3w972_izLhg4' />
+                        <img id='jungs' src='https://drive.google.com/uc?export=view&id=1BUpVf7Jn9HbL0tgp8JjN-7Cm2yHmmn6H' />
+                    </div>
                 </div>
                 </React.Fragment>
                 return(
@@ -282,7 +602,7 @@
                 let toRender = 
                 <React.Fragment> 
                 <div class='container'>
-                    <div id='gameover'>
+                    <div id='gameover1'>
                         <p class='topword'>GAME</p>
                         <p class='btmword'>OVER</p>
                         <p class='gofront'
@@ -291,12 +611,83 @@
                             }}>go to front menu &gt;</p>
                     </div>
                 </div>
-                </React.Fragment>
+                </React.Fragment>;
+                toRender = 
+                <React.Fragment> 
+                <div class='container'>
+                    <div id='gameover2'>
+                        <p class='topword'>프로젝트에 진심이 부족하여 프로젝트가 죽었습니다</p>
+                        <p class='btmword'>게임오버</p>
+                        <p class='gofront blink_me'
+                            onClick={()=>{
+                                props.history.push({ pathname:'/', state:{  } });
+                            }}>다시 도전하기 &gt;</p>
+                    </div>
+                </div>
+                </React.Fragment>;
                 return(
                 <React.Fragment> 
                 {toRender}
                 </React.Fragment>); 
             };
+
+            function Credits (props) {
+                let toRender = 
+                <React.Fragment> 
+                <div class='credits'>
+                    <div class='banner'>
+                    <p>Project Maker <span>ver.1</span></p></div>
+                    <div class='name'>
+                        &nbsp;
+                    </div>
+                    <div class='ment'>
+                        안키워주면 죽을것인가
+                    </div>
+                    <div class='ment'>
+                        그렇지 않다.
+                    </div>
+                    <div class='name'>
+                        &nbsp;
+                    </div>
+                    <div class='ment'>
+                        지속적으로
+                    </div>
+                    <div class='ment'>
+                        여러 프로젝트에 
+                    </div>
+                    <div class='ment'>
+                        나를 노출시키면서
+                    </div>
+                    <div class='ment'>
+                        나를 성장케하면 된다.
+                    </div>
+                    <div class='name'>
+                        &nbsp;
+                    </div>
+                    <div class='ment'>
+                        그것이 개발자이다.
+                    </div>
+                    <div class='ment'>
+                        개발자의 숙명이다.
+                    </div>
+                    <div class='name'>
+                        &nbsp;
+                    </div>
+                    <div class='name'>
+                        &nbsp;
+                    </div>
+                    <div class='job'>
+                    제작자</div>
+                    <div class='name'>
+                    Space Yam</div>
+                </div>
+                </React.Fragment>;
+                return(
+                <React.Fragment> 
+                {toRender}
+                </React.Fragment>); 
+            };
+
         }
         const rootElement = document.getElementById('root');
         ReactDOM.render(<App />, rootElement);

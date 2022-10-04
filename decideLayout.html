@@ -132,7 +132,7 @@
                             <li class="depth2">
                                 <ol>
                                     ${value.subs.map((_itm, _idx)=>
-                                        String(`<li><a href="${_itm.route}">
+                                        String(`<li><a href="${_itm.route+queryString}">
                                             ${(!value.title.includes('기타')?(idx+1)+_idx+'.':'*')} ${_itm.title}</a></li>`)
                                     )}
                                 </ol>
