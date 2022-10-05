@@ -94,6 +94,23 @@
                 background-image: linear-gradient(262deg, rgba(94,114,235,1) 0%, rgba(255,145,144,1) 56%, rgba(254,193,149,1) 100%);
             }
         }
+
+        @media print {
+            .myDivToPrint {
+                background-color: white;
+                height: 100%;
+                width: 100%;
+                position: fixed;
+                top: 5px;
+                left: 0;
+                margin: 0;
+                padding: 15px;
+                font-size: 14px;
+                line-height: 18px;
+            }
+        }
+
+        #print {z-index:10;bottom:0;right:5px;background-color:white;position:fixed;}
     </style>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css' /> 
     <style>
@@ -105,29 +122,279 @@
     <aside>
         <ol></ol>
     </aside>
-    <section>
-        <p><h2 class='gradient'>프로젝트 명세</h2></p>
+    <section class="myDivToPrint">
         <div id=''></div>
         <div id=''></div>
-        <div id='content1' class='content'>
+        <div id='content1' class='content myDivToPrint'>
+            <h5>&lt; 프로젝트 명세 &gt;</h5>
+            <br/>
             <div>프로젝트 서비스 대상: <input id='projectFor' class='specs' type='text' /></div> 
-            <div>사이트 속성: <input id='siteInfo' class='specs' type='text' /></div> 
+            <div>사이트 속성: <input id='siteInfo' class='specs' type='text' /></div>
+            <div>클라이언트 환경: 
+                <select id='clientEnv' class='' type='text' >
+                    <option value="">선택</option>
+                    <option value="WEB">PC(웹)</option>
+                    <option value="ANDROID">모바일(안드로이드)</option>
+                    <option value="IOS">모바일(IOS)</option>
+                </select>
+            </div>  
+            <div>프로젝트 특성: 
+                <select id='projectAttr' class='' type='text' >
+                    <option value="">선택</option>
+                    <option value="internal">private</option>
+                    <option value="SEO">public</option>
+                </select>
+            </div>  
+            <br/>* HTML/CSS 는 필수 입니다...  
+            <div>FE 사용 프레임워크: 
+                <select id='feFw' class='' type='text' >
+                    <option value="">(선택) 상위 항목을 먼저 선택하세요</option>
+                    <option value="AndroidStudio">AndroidStudio(Kotlin)</option>
+                    <option value="XCode">XCode(Swift)</option>
+                    <option value="Flutter">Flutter(DART)</option>
+                    <option value="ReactNative">ReactNative</option>
+                    <option value="VanillaJS">VanillaJS/JQuery</option>
+                    <option value="ReactJS_CDN">ReactJS(CDN)</option>
+                    <option value="ReactJS_CSR">ReactJS(CSR)</option>
+                    <option value="VueJS">VueJS</option>
+                    <option value="NextJS">NextJS(React)</option>
+                    <option value="NuxtJS">NuxtJS(Vue)</option>
+                    <option value="ETC_FE">기타 프론트엔드</option>
+                </select>
+                <input id="ETC_FE" type='text' hidden/>
+                <br/>* 모바일(cordova, TitaniumSDK...), 웹(Angular, Svelte...) 등 더 많은 선택지가 있긴합니다.
+            </div>  
+            <br/>
+            <div id='BE'>BE 사용 프레임워크: 
+                <select id='beFw' class='' type='text' >
+                    <option value="">선택</option>
+                    <option value="PHP">laravel(PHP)</option>
+                    <option value="Ruby">Ruby on Rails(Ruby)</option>
+                    <option value="ASP">ASP.NET(C#, VB, J#, C++)</option>
+                    <option value="JSP">JSP(JAVA)</option>
+                    <option value="SpringBoot">Spring Boot(JAVA/Kotlin)</option>
+                    <option value="FastAPI">FAST API(Python)</option>
+                    <option value="express">Express(NodeJS)</option>
+                    <option value="ETC_BE">기타 백엔드</option>
+                </select>
+                <input id="ETC_BE" type='text' hidden/>
+                <br/>* GO, Rust 등 더 많은 선택지가 있긴합니다.
+            </div>  
+            <br/>
+            <div>배포/출시 경로: 
+                <select id='deployRoute' class='' type='text' >
+                    <option value="">(선택) 상위 항목을 먼저 선택하세요</option>
+                    <option value="APK">.apk 파일로 개인 폰에 설치</option>
+                    <option value="IPA">.ipa 파일로 개인 폰에 설치</option>
+                    <option value="GOOGLE">구글 플레이 스토어</option>
+                    <option value="APPLE">애플 스토어</option>
+                    <option value="GitHubPages">깃헙 페이지</option>
+                    <option value="Netlify">넷리파이</option>
+                    <option value="Heroku">헤로쿠</option>
+                    <option value="AWS">AWS</option>
+                    <option value="ETC_HOST">기타 호스팅 사이트</option>
+                </select>
+                <input id="ETC_HOST" type='text' hidden/>
+                <br/>* 웹의 경우 관련 서비스들이 너무나도 방대합니다.
+            </div> 
         </div>
+        <button id='print' onclick="window.print()">결과 출력하기</button>
     </section>
     <footer>
         by Space Yam
     </footer>
-        
+    
     <script>
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString).entries();
         let getParam = Object.fromEntries(urlParams); console.log('queryString:', getParam);
         if(getParam.site===undefined) window.location.search = '?site=';
 
-        window.onload = ()=>{
+        function initFE() {
+            document.querySelector(`option[value='AndroidStudio']`).hidden = true;
+            document.querySelector(`option[value='XCode']`).hidden = true;
+            document.querySelector(`option[value='Flutter']`).hidden = true;
+            document.querySelector(`option[value='ReactNative']`).hidden = true;
+            document.querySelector(`option[value='VanillaJS']`).hidden = true;
+            document.querySelector(`option[value='ReactJS_CDN']`).hidden = true;
+            document.querySelector(`option[value='ReactJS_CSR']`).hidden = true;
+            document.querySelector(`option[value='VueJS']`).hidden = true;
+            document.querySelector(`option[value='NextJS']`).hidden = true;
+            document.querySelector(`option[value='NuxtJS']`).hidden = true;
+            document.querySelector(`option[value='ETC_FE']`).hidden = true;
+        }
+        function initBE() {
+            document.querySelector(`option[value='PHP']`).hidden = true;
+            document.querySelector(`option[value='Ruby']`).hidden = true;
+            document.querySelector(`option[value='ASP']`).hidden = true;
+            document.querySelector(`option[value='JSP']`).hidden = true;
+            document.querySelector(`option[value='SpringBoot']`).hidden = true;
+            document.querySelector(`option[value='FastAPI']`).hidden = true;
+            document.querySelector(`option[value='express']`).hidden = true;
+        }
+        function initDEPLOY() {
+            document.querySelector(`option[value='APK']`).hidden = true;
+            document.querySelector(`option[value='IPA']`).hidden = true;
+            document.querySelector(`option[value='APPLE']`).hidden = true;
+            document.querySelector(`option[value='GOOGLE']`).hidden = true;
+            document.querySelector(`option[value='GitHubPages']`).hidden = true;
+            document.querySelector(`option[value='Netlify']`).hidden = true;
+            document.querySelector(`option[value='Heroku']`).hidden = true;
+            document.querySelector(`option[value='AWS']`).hidden = true;
+            document.querySelector(`option[value='ETC_HOST']`).hidden = true;
+        }
+        function initOptions() { console.log(String(getParam.site))
+            initFE();
+            if(String(getParam.site)==='static') { 
+                initBE(); 
+                document.getElementById('BE').hidden = true; 
+                document.querySelector(`option[value='ANDROID']`).hidden = true;
+                document.querySelector(`option[value='IOS']`).hidden = true;
+            }
+            initDEPLOY();
+        }
+        function setForWEB() { initFE(); initDEPLOY();
+            document.querySelector(`option[value='Flutter']`).hidden = false;
+            document.querySelector(`option[value='ReactNative']`).hidden = false;
+            document.querySelector(`option[value='VanillaJS']`).hidden = false;
+            document.querySelector(`option[value='ReactJS_CDN']`).hidden = false;
+            document.querySelector(`option[value='ReactJS_CSR']`).hidden = false;
+            document.querySelector(`option[value='VueJS']`).hidden = false;
+            document.querySelector(`option[value='NextJS']`).hidden = false;
+            document.querySelector(`option[value='NuxtJS']`).hidden = false;
+
+            if(String(getParam.site)==='static') { 
+                document.querySelector(`option[value='GitHubPages']`).hidden = false;
+                document.querySelector(`option[value='Netlify']`).hidden = false;
+            }
+            document.querySelector(`option[value='Heroku']`).hidden = false;
+            document.querySelector(`option[value='AWS']`).hidden = false;
+            document.querySelector(`option[value='ETC_HOST']`).hidden = false;
+        }
+        function setForANDROID() { initFE(); initDEPLOY();
+            document.querySelector(`option[value='AndroidStudio']`).hidden = false;
+            document.querySelector(`option[value='Flutter']`).hidden = false;
+            document.querySelector(`option[value='ReactNative']`).hidden = false;
+
+            document.querySelector(`option[value='APK']`).hidden = false;
+            document.querySelector(`option[value='GOOGLE']`).hidden = false;
+        }
+        function setForIOS() { initFE(); initDEPLOY();
+            document.querySelector(`option[value='XCode']`).hidden = false;
+            document.querySelector(`option[value='Flutter']`).hidden = false;
+            document.querySelector(`option[value='ReactNative']`).hidden = false;
+
+            document.querySelector(`option[value='IPA']`).hidden = false;
+            document.querySelector(`option[value='APPLE']`).hidden = false;
+        }
+
+        function setForinternal() { 
+            document.querySelector(`option[value='Flutter']`).hidden = true;
+            document.querySelector(`option[value='ReactNative']`).hidden = true;
+            document.querySelector(`option[value='VanillaJS']`).hidden = true;
+            document.querySelector(`option[value='NextJS']`).hidden = true;
+            document.querySelector(`option[value='NuxtJS']`).hidden = true;
+
+            document.querySelector(`option[value='GOOGLE']`).hidden = true;
+            document.querySelector(`option[value='APPLE']`).hidden = true;
+        }
+        function setForSEO() { 
+            document.querySelector(`option[value='ReactJS_CDN']`).hidden = true;
+            document.querySelector(`option[value='ReactJS_CSR']`).hidden = true;
+            document.querySelector(`option[value='VueJS']`).hidden = true;
+
+            document.querySelector(`option[value='APK']`).hidden = true;
+            document.querySelector(`option[value='IPA']`).hidden = true;
+        }
+
+        function initChosen() {
+            document.getElementById('beFw').value = '';
+            document.getElementById('feFw').value = '';
+            document.getElementById('deployRoute').value = '';
+        }
+
+        window.onload = ()=>{ 
+            initOptions();
             document.getElementById('projectFor').value= getParam.forWho;
             document.getElementById('siteInfo').value= (getParam.site==='static'?
-                '백엔드/모델이 없는 스태틱 사이트':'프론트엔드+백엔드의 풀스택 사이트');
+                '백엔드/모델이 없는 스태틱 사이트':'프론트엔드 + 백엔드의 풀스택 사이트');
+
+            let clientEnvRes = [], projectAttrRes = [], feFwRes = [], beFwRes = [], deployRouteRes = [];
+            document.getElementById('clientEnv').addEventListener('change', 
+                (e)=>{ console.log(1, clientEnvRes, projectAttrRes, feFwRes, beFwRes, deployRouteRes);
+                    clientEnvRes = []; initChosen();
+                    if(e.target.value==='') { initOptions(); document.getElementById('projectAttr').value = ''; }
+                    else {
+                        if(e.target.value==='WEB') clientEnvRes.push(setForWEB);
+                        if(e.target.value==='ANDROID') clientEnvRes.push(setForANDROID);
+                        if(e.target.value==='IOS') clientEnvRes.push(setForIOS);
+                        clientEnvRes.map((itm)=> itm()); projectAttrRes.map((itm)=> itm());
+                        feFwRes.map((itm)=> itm()); beFwRes.map((itm)=> itm()); deployRouteRes.map((itm)=> itm()); 
+                    }
+                });
+            document.getElementById('projectAttr').addEventListener('change', 
+                (e)=>{ console.log(2, clientEnvRes, projectAttrRes, feFwRes, beFwRes, deployRouteRes);
+                    projectAttrRes = []; initChosen();
+                    if(e.target.value==='') { initOptions(); document.getElementById('clientEnv').value = ''; }
+                    else {
+                        if(e.target.value==='internal') projectAttrRes.push(setForinternal);
+                        if(e.target.value==='SEO') projectAttrRes.push(setForSEO);
+                        clientEnvRes.map((itm)=> itm()); projectAttrRes.map((itm)=> itm());
+                        feFwRes.map((itm)=> itm()); beFwRes.map((itm)=> itm()); deployRouteRes.map((itm)=> itm());
+                    }
+                });
+            document.getElementById('feFw').addEventListener('change', 
+                (e)=>{ console.log(3, clientEnvRes, projectAttrRes, feFwRes, beFwRes, deployRouteRes);
+                    feFwRes = [];
+                    if(e.target.value==='ETC_FE') document.getElementById('ETC_FE').hidden = false;
+                    else { document.getElementById('ETC_FE').hidden = true;
+                        //if(e.target.value==='AndroidStudio') feFwRes.push(
+                        //if(e.target.value==='XCode') feFwRes.push(
+                        //if(e.target.value==='Flutter') feFwRes.push(
+                        //if(e.target.value==='ReactNative') feFwRes.push(
+                        //if(e.target.value==='VanillaJS') feFwRes.push(
+                        //if(e.target.value==='ReactJS_CDN') feFwRes.push(
+                        //if(e.target.value==='ReactJS_CSR') feFwRes.push(
+                        //if(e.target.value==='VueJS') feFwRes.push(
+                        //if(e.target.value==='NextJS') feFwRes.push(
+                        //if(e.target.value==='NuxtJS') feFwRes.push(
+                    }
+                    //clientEnvRes.map((itm)=> itm()); projectAttr.map((itm)=> itm());
+                    //feFwRes.map((itm)=> itm()); beFwRes.map((itm)=> itm()); deployRouteRes.map((itm)=> itm());
+                });
+            document.getElementById('beFw').addEventListener('change', 
+                (e)=>{ console.log(4, clientEnvRes, projectAttr, feFwRes, beFwRes, deployRouteRes);
+                    beFwRes = [];
+                    if(e.target.value==='ETC_BE') document.getElementById('ETC_BE').hidden = false;
+                    else { document.getElementById('ETC_BE').hidden = true;
+                        //if(e.target.value==='PHP') beFwRes.push(
+                        //if(e.target.value==='Ruby') beFwRes.push(
+                        //if(e.target.value==='ASP') beFwRes.push(
+                        //if(e.target.value==='JSP') beFwRes.push(
+                        //if(e.target.value==='SpringBoot') beFwRes.push(
+                        //if(e.target.value==='FastAPI') beFwRes.push(
+                        //if(e.target.value==='express') beFwRes.push(
+                    }
+                    //clientEnvRes.map((itm)=> itm()); projectAttr.map((itm)=> itm());
+                    //feFwRes.map((itm)=> itm()); beFwRes.map((itm)=> itm()); deployRoute.map((itm)=> itm());
+                });
+            document.getElementById('deployRoute').addEventListener('change', 
+                (e)=>{ console.log(5, clientEnvRes, projectAttr, feFwRes, beFwRes, deployRouteRes);
+                    deployRouteRes = [];
+                    if(e.target.value==='ETC_HOST') document.getElementById('ETC_HOST').hidden = false;
+                    else { document.getElementById('ETC_HOST').hidden = true;
+                        //if(e.target.value==='APK') deployRouteRes.push(
+                        //if(e.target.value==='IPA') deployRouteRes.push(
+                        //if(e.target.value==='APPLE') deployRouteRes.push(
+                        //if(e.target.value==='GOOGLE') deployRouteRes.push(
+                        //if(e.target.value==='GitHubPages') deployRouteRes.push(
+                        //if(e.target.value==='Netlify') deployRouteRes.push(
+                        //if(e.target.value==='Heroku') deployRouteRes.push(
+                        //if(e.target.value==='AWS') deployRouteRes.push(
+                    }
+                    //clientEnvRes.map((itm)=> itm()); projectAttr.map((itm)=> itm());
+                    //feFwRes.map((itm)=> itm()); beFwRes.map((itm)=> itm()); deployRouteRes.map((itm)=> itm());
+                });
 
             ajax_get('./data/routes.json', (data)=>{ console.log('menus:', data); //console.log(JSON.stringify(data, null, 4));
                 let menuobj = data, menulist;

@@ -16,35 +16,35 @@
     },
     "content3": {
         "title": "BE",
-        "route": "./", 
+        "route": "./configureBE.html", 
         "subs": [
-            { "title": "BE 생성하기", "route": "./" }
+            { "title": "BE 생성하기", "route": "./configureBE.html" }
         ]
     },
     "content4": {
         "title": "형상관리",
-        "route": "./", 
+        "route": "./uploadToGit.html", 
         "subs": [
             { "title": "FE/BE GIT에 올리기", "route": "./uploadToGit.html" }
         ]
     },
     "content5": {
         "title": "배포",
-        "route": "./", 
+        "route": "./deployProject.html", 
         "subs": [
             { "title": "프로젝트 배포하기", "route": "./deployProject.html" }
         ]
     },
     "content6": {
         "title": "서비스 구체화하기",
-        "route": "./", 
+        "route": "./defineDetails.html", 
         "subs": [
             { "title": "프로젝트 명세 정리", "route": "./defineDetails.html" }
         ]
     },
     "content7": {
         "title": "기타 유틸",
-        "route": "./", 
+        "route": "./convertBase64.html", 
         "subs": [
             { "title": "이미지 base64로 변환", "route": "./convertBase64.html" }
         ]
