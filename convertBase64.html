@@ -111,21 +111,21 @@
         <div id='content1' class='content'>
             <div>
                 1. image to base64
-                <input id="inp" type="file" onchange="readFile(this)">
+                <input id='inp' type='file' onchange='readFile(this)'>
               </div>
-              <label for="b64"></label>
-              <textarea id="b64" rows="100" cols="135" placeholder="image to base64"></textarea>
+              <label for='b64'></label>
+              <textarea id='b64' rows='100' cols='135' placeholder='image to base64'></textarea>
               <div>
-                <img id="img" height="130px">
+                <img id='img' height='130px'>
               </div>
               <br/>
                 2. base64 to image
               <br/>
-              <label for="fromB64"></label>
-              <textarea id="fromB64" rows="100" cols="135" placeholder="base64 to image"
-                        onblur="readBase64(this.value)"></textarea>
+              <label for='fromB64'></label>
+              <textarea id='fromB64' rows='100' cols='135' placeholder='base64 to image'
+                        onblur='readBase64(this.value)'></textarea>
               <div>
-                <img id="toImg" height="130px">
+                <img id='toImg' height='130px'>
             </div>
         </div>
     </section>
@@ -138,13 +138,13 @@
             if (!e.files || !e.files[0]) return;
                 const FR = new FileReader();
                 FR.onloadend = (evt)=>{ //console.log(evt.target);
-                    document.querySelector("#img").src       = evt.target.result;
-                    document.querySelector("#b64").innerHTML = evt.target.result;     
+                    document.querySelector('#img').src       = evt.target.result;
+                    document.querySelector('#b64').innerHTML = evt.target.result;     
             }; 
             console.log('readAsDataURL:', FR.readAsDataURL(e.files[0]));
         }
         function readBase64(base64) { 
-            document.querySelector("#toImg").src = base64;
+            document.querySelector('#toImg').src = base64;
         }
 
         const queryString = window.location.search;
@@ -162,11 +162,11 @@
                     if(String(getParam.site)==='static' && String(value.title)==='BE') {}
                     else {
                         document.querySelector('aside ol').innerHTML+=`
-                            <li class="depth1">${value.title})</li>
-                            <li class="depth2">
+                            <li class='depth1'>${value.title})</li>
+                            <li class='depth2'>
                                 <ol>
                                     ${value.subs.map((_itm, _idx)=>
-                                        String(`<li><a href="${_itm.route+queryString}">
+                                        String(`<li><a href='${_itm.route+queryString}'>
                                             ${(!value.title.includes('기타')?(idx+1)+_idx+'.':'*')} ${_itm.title}</a></li>`)
                                     )}
                                 </ol>

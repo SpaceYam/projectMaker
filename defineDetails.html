@@ -95,6 +95,15 @@
             }
         }
 
+        /* TOOLTIP */
+        [data-tooltip]{position:relative;}
+        [data-tooltip]:before,
+        [data-tooltip]:after{visibility:hidden;opacity:0;position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;transition:all .2s ease;font-size:11px;font-family:dotum;letter-spacing:-1px;}
+        [data-tooltip]:before{content:attr(data-tooltip);height:13px;position:absolute;top:-20px;padding:5px 10px;border-radius:5px;color:rgb(0, 0, 0);background:#ffffff;box-shadow:0 3px 8px rgba(165, 165, 165, 0.5);}
+        [data-tooltip]:after{content: '';border-left:5px solid transparent;top:2px;border-right:5px solid transparent;border-top:5px solid #000000;}
+        [data-tooltip]:not([data-tooltip='']):hover:before{visibility:visible;opacity:1;top:-30px}
+        [data-tooltip]:not([data-tooltip='']):hover:after{visibility:visible;opacity:1;top:-8px}
+
         @media print {
             .myDivToPrint {
                 background-color: white;
@@ -122,7 +131,7 @@
     <aside>
         <ol></ol>
     </aside>
-    <section class="myDivToPrint">
+    <section class='myDivToPrint'>
         <div id=''></div>
         <div id=''></div>
         <div id='content1' class='content myDivToPrint'>
@@ -132,73 +141,74 @@
             <div>사이트 속성: <input id='siteInfo' class='specs' type='text' /></div>
             <div>클라이언트 환경: 
                 <select id='clientEnv' class='' type='text' >
-                    <option value="">선택</option>
-                    <option value="WEB">PC(웹)</option>
-                    <option value="ANDROID">모바일(안드로이드)</option>
-                    <option value="IOS">모바일(IOS)</option>
+                    <option value=''>선택</option>
+                    <option value='WEB'>PC(웹)</option>
+                    <option value='ANDROID'>모바일(안드로이드)</option>
+                    <option value='IOS'>모바일(IOS)</option>
                 </select>
             </div>  
-            <div>프로젝트 특성: 
+            <div ><span data-tooltip='사람들에게 공유할 프로젝트인지 여부를 확인합니다'>
+                    프로젝트 특성:</span>
                 <select id='projectAttr' class='' type='text' >
-                    <option value="">선택</option>
-                    <option value="internal">private</option>
-                    <option value="SEO">public</option>
+                    <option value=''>선택</option>
+                    <option value='internal'>private</option>
+                    <option value='SEO'>public</option>
                 </select>
             </div>  
             <br/>* HTML/CSS 는 필수 입니다...  
-            <div>FE 사용 프레임워크: 
+            <div >FE 사용 프레임워크: 
                 <select id='feFw' class='' type='text' >
-                    <option value="">(선택) 상위 항목을 먼저 선택하세요</option>
-                    <option value="AndroidStudio">AndroidStudio(Kotlin)</option>
-                    <option value="XCode">XCode(Swift)</option>
-                    <option value="Flutter">Flutter(DART)</option>
-                    <option value="ReactNative">ReactNative</option>
-                    <option value="VanillaJS">VanillaJS/JQuery</option>
-                    <option value="ReactJS_CDN">ReactJS(CDN)</option>
-                    <option value="ReactJS_CSR">ReactJS(CSR)</option>
-                    <option value="VueJS">VueJS</option>
-                    <option value="NextJS">NextJS(React)</option>
-                    <option value="NuxtJS">NuxtJS(Vue)</option>
-                    <option value="ETC_FE">기타 프론트엔드</option>
+                    <option value=''>(선택) 상위 항목을 먼저 선택하세요</option>
+                    <option value='AndroidStudio'>AndroidStudio(Kotlin)</option>
+                    <option value='XCode'>XCode(Swift)</option>
+                    <option value='Flutter'>Flutter(DART)</option>
+                    <option value='ReactNative'>ReactNative</option>
+                    <option value='VanillaJS' >VanillaJS/JQuery</option>
+                    <option value='ReactJS_CDN' >ReactJS(CDN)</option>
+                    <option value='ReactJS_CSR'>ReactJS(CSR)</option>
+                    <option value='VueJS'>VueJS</option>
+                    <option value='NextJS' title='SSR을 지원하며 SEO에 좋은 SSG이다'>NextJS(React)</option>
+                    <option value='NuxtJS'>NuxtJS(Vue)</option>
+                    <option value='ETC_FE'>기타 프론트엔드</option>
                 </select>
-                <input id="ETC_FE" type='text' hidden/>
+                <input id='ETC_FE' type='text' hidden/>
                 <br/>* 모바일(cordova, TitaniumSDK...), 웹(Angular, Svelte...) 등 더 많은 선택지가 있긴합니다.
             </div>  
             <br/>
             <div id='BE'>BE 사용 프레임워크: 
                 <select id='beFw' class='' type='text' >
-                    <option value="">선택</option>
-                    <option value="PHP">laravel(PHP)</option>
-                    <option value="Ruby">Ruby on Rails(Ruby)</option>
-                    <option value="ASP">ASP.NET(C#, VB, J#, C++)</option>
-                    <option value="JSP">JSP(JAVA)</option>
-                    <option value="SpringBoot">Spring Boot(JAVA/Kotlin)</option>
-                    <option value="FastAPI">FAST API(Python)</option>
-                    <option value="express">Express(NodeJS)</option>
-                    <option value="ETC_BE">기타 백엔드</option>
+                    <option value=''>선택</option>
+                    <option value='PHP'>laravel(PHP)</option>
+                    <option value='Ruby'>Ruby on Rails(Ruby)</option>
+                    <option value='ASP'>ASP.NET(C#, VB, J#, C++)</option>
+                    <option value='JSP'>JSP(JAVA)</option>
+                    <option value='SpringBoot'>Spring Boot(JAVA/Kotlin)</option>
+                    <option value='FastAPI'>FAST API(Python)</option>
+                    <option value='express'>Express(NodeJS)</option>
+                    <option value='ETC_BE'>기타 백엔드</option>
                 </select>
-                <input id="ETC_BE" type='text' hidden/>
+                <input id='ETC_BE' type='text' hidden/>
                 <br/>* GO, Rust 등 더 많은 선택지가 있긴합니다.
             </div>  
             <br/>
             <div>배포/출시 경로: 
                 <select id='deployRoute' class='' type='text' >
-                    <option value="">(선택) 상위 항목을 먼저 선택하세요</option>
-                    <option value="APK">.apk 파일로 개인 폰에 설치</option>
-                    <option value="IPA">.ipa 파일로 개인 폰에 설치</option>
-                    <option value="GOOGLE">구글 플레이 스토어</option>
-                    <option value="APPLE">애플 스토어</option>
-                    <option value="GitHubPages">깃헙 페이지</option>
-                    <option value="Netlify">넷리파이</option>
-                    <option value="Heroku">헤로쿠</option>
-                    <option value="AWS">AWS</option>
-                    <option value="ETC_HOST">기타 호스팅 사이트</option>
+                    <option value=''>(선택) 상위 항목을 먼저 선택하세요</option>
+                    <option value='APK'>.apk 파일로 개인 폰에 설치</option>
+                    <option value='IPA'>.ipa 파일로 개인 폰에 설치</option>
+                    <option value='GOOGLE'>구글 플레이 스토어</option>
+                    <option value='APPLE'>애플 스토어</option>
+                    <option value='GitHubPages'>깃헙 페이지</option>
+                    <option value='Netlify'>넷리파이</option>
+                    <option value='Heroku'>헤로쿠</option>
+                    <option value='AWS'>AWS</option>
+                    <option value='ETC_HOST'>기타 호스팅 사이트</option>
                 </select>
-                <input id="ETC_HOST" type='text' hidden/>
+                <input id='ETC_HOST' type='text' hidden/>
                 <br/>* 웹의 경우 관련 서비스들이 너무나도 방대합니다.
             </div> 
         </div>
-        <button id='print' onclick="window.print()">결과 출력하기</button>
+        <button id='print' onclick='window.print()'>결과 출력하기</button>
     </section>
     <footer>
         by Space Yam
@@ -404,11 +414,11 @@
                     if(String(getParam.site)==='static' && String(value.title)==='BE') {}
                     else {
                         document.querySelector('aside ol').innerHTML+=`
-                            <li class="depth1">${value.title})</li>
-                            <li class="depth2">
+                            <li class='depth1'>${value.title})</li>
+                            <li class='depth2'>
                                 <ol>
                                     ${value.subs.map((_itm, _idx)=>
-                                        String(`<li><a href="${_itm.route+queryString}">
+                                        String(`<li><a href='${_itm.route+queryString}'>
                                             ${(!value.title.includes('기타')?(idx+1)+_idx+'.':'*')} ${_itm.title}</a></li>`)
                                     )}
                                 </ol>

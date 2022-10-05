@@ -158,11 +158,11 @@ git push -u origin master
                     if(String(getParam.site)==='static' && String(value.title)==='BE') {}
                     else {
                         document.querySelector('aside ol').innerHTML+=`
-                            <li class="depth1">${value.title})</li>
-                            <li class="depth2">
+                            <li class='depth1'>${value.title})</li>
+                            <li class='depth2'>
                                 <ol>
                                     ${value.subs.map((_itm, _idx)=>
-                                        String(`<li><a href="${_itm.route+queryString}">
+                                        String(`<li><a href='${_itm.route+queryString}'>
                                             ${(!value.title.includes('기타')?(idx+1)+_idx+'.':'*')} ${_itm.title}</a></li>`)
                                     )}
                                 </ol>
