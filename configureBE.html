@@ -95,10 +95,14 @@
             }
         }
     </style>
-    <style></style>
+    <style>
+        pre b { color:blue; }
+        pre span { color:lime;font-weight:700; }
+        pre a { color:green;font-weight:700; }
+    </style>
 </head>
 <body>
-    
+    <embed type='text/html' src='./head.html' style='position:fixed;top:10px;right:0'/>
     <aside>
         <ol></ol>
     </aside>
@@ -106,7 +110,50 @@
         <p><h2 class='gradient'>BE 생성하기</h2></p>
         <div id=''></div>
         <div id=''></div>
-        <div id='content1' class='content'></div>
+        <div id='content1' class='content'>
+            <h4>laravel</h4>
+            <pre>
+                After you have installed PHP and Composer, 
+                you may create a new Laravel project via the Composer create-project command(CLI):
+                <b>composer create-project laravel/laravel example-app</b>
+                run by <span>php artisan serve --port=8080</span>
+            </pre>
+            <h4>Ruby on rails</h4>
+            <pre>
+                download and install RubyGems at https://rubyinstaller.org/ then use CLI:
+                <b>gem install rails</b>
+                run by <span>rails server</span>
+            </pre>
+            <h4>ASP.NET</h4>
+            <pre>
+                Open Visual Studio 2017 and select File menu -> New -> Project
+                Create MVC Application, Create a New Project in Visual Studio, From the New Project dialog
+                expand Visual C# node and select Web in the left pane, and then select 
+                <b>ASP.NET Web Application (.NET Framework)</b>
+                run by <a>HomeController.cs > Index() > View() > create View</a>
+            </pre>
+            <h4>JSP</h4>
+            <pre>
+                install eclipse and Apache Tomcat then the following 
+                <b>File Menu -> New -> dynamic web project</b>
+                run by <a>JSP project > Run as > Run on Server</a>
+            </pre>
+            <h4>Spring Boot</h4>
+            <pre>
+                create a <b>new spring-starter-project</b> with STS IDE or at https://start.spring.io/
+                run by <a>project right-click > Run As > Spring Boot App</a>
+            </pre>
+            <h4>FastAPI</h4>
+            <pre>
+                install Python 3.7+ then use CLI: <b>pip install fastapi</b>, <b>pip install uvicorn</b>
+                run by <span>uvicorn main:app --reload --host=0.0.0.0 --port=8000</span>
+            </pre>
+            <h4>Express.js</h4>
+            <pre>
+                install Node.js then use CLI: <b>npm install express</b>, <b>npm init -y</b>
+                run by <span>node serverfile.js</span>
+            </pre>
+        </div>
     </section>
     <footer>
         by Space Yam

@@ -127,7 +127,7 @@
     </style>
 </head>
 <body>
-    
+    <embed type='text/html' src='./head.html' style='position:fixed;top:10px;right:0'/>
     <aside>
         <ol></ol>
     </aside>
@@ -137,8 +137,8 @@
         <div id='content1' class='content myDivToPrint'>
             <h5>&lt; 프로젝트 명세 &gt;</h5>
             <br/>
-            <div>프로젝트 서비스 대상: <input id='projectFor' class='specs' type='text' /></div> 
-            <div>사이트 속성: <input id='siteInfo' class='specs' type='text' /></div>
+            <div>프로젝트 서비스 대상: <input id='projectFor' class='specs' type='text' placeholder='미정'/></div> 
+            <div>사이트 속성: <input id='siteInfo' class='specs' type='text' placeholder='미정'/></div>
             <div>클라이언트 환경: 
                 <select id='clientEnv' class='' type='text' >
                     <option value=''>선택</option>
@@ -179,12 +179,13 @@
                 <select id='beFw' class='' type='text' >
                     <option value=''>선택</option>
                     <option value='PHP'>laravel(PHP)</option>
-                    <option value='Ruby'>Ruby on Rails(Ruby)</option>
+                    <option value='Ruby'>Ruby on rails(Ruby)</option>
                     <option value='ASP'>ASP.NET(C#, VB, J#, C++)</option>
                     <option value='JSP'>JSP(JAVA)</option>
                     <option value='SpringBoot'>Spring Boot(JAVA/Kotlin)</option>
-                    <option value='FastAPI'>FAST API(Python)</option>
-                    <option value='express'>Express(NodeJS)</option>
+                    <option value='FastAPI' title='경량 비동기 서버 게이트웨이 인터페이스 프레임워크인 Starlette 기반의 고성능 프레임워크이다'>
+                        FAST API(Python)</option>
+                    <option value='express'>ExpressJS(NodeJS)</option>
                     <option value='ETC_BE'>기타 백엔드</option>
                 </select>
                 <input id='ETC_BE' type='text' hidden/>
@@ -325,7 +326,7 @@
 
         window.onload = ()=>{ 
             initOptions();
-            document.getElementById('projectFor').value= getParam.forWho;
+            document.getElementById('projectFor').value= (getParam.forWho!=undefined?getParam.forWho:'');
             document.getElementById('siteInfo').value= (getParam.site==='static'?
                 '백엔드/모델이 없는 스태틱 사이트':'프론트엔드 + 백엔드의 풀스택 사이트');
 
