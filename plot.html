@@ -34,7 +34,7 @@
         #root, .App, .container {width:100%;height:100%;}
         .container {background-color:#393936}
 
-        p span {font-size:14px}
+        p span {font-size:14px;color:gray}
         .poster {left: 10%;top: 8%;height: 80%;width: 80%;position: relative;}
         .title {left: 17px;top: 30px;z-index:1;text-shadow: 2px 2px 5px gray;
             position: relative;font-size:50pt;font-family: 'Lobster', sans-serif;}
@@ -348,14 +348,14 @@
                 <React.Fragment> 
                 <div class='container' tabindex='1' //style={{backgroundColor:'black'}}
                     onClick={()=>{
-                        props.history.push({ pathname:'/decision', state:{  } });
+                        //props.history.push({ pathname:'/decision', state:{  } });
                     }}
                     onKeyPress={(e)=>{ console.log(e);
                         if(e.key==='Enter') props.history.push({ pathname:'/decision', state:{  } });
                     }}>
                     <div class='poster'>
-                        <p style={{marginBottom:'10px',color:'white'}}>
-                            <span>예정하시는 프로젝트를 빠르게 정의하세요.</span> 미(정의) 프(로젝트) 시(뮬레이션)</p>
+                        <p style={{marginBottom:'10px',color:'#efff66'}}>
+                            `미(정의) 프(로젝트) 시(뮬레이션)` <span> &#183; 예정하시는 프로젝트를 빠르게 정의하세요 &#128203;</span></p>
                         <div class='title glow'>
                             <p class='topword '>Project</p>
                             <p class='btmword '>Maker</p>
