@@ -10,10 +10,17 @@
     <meta charset='UTF-8' />
     <meta http-equiv='X-UA-Compatible' content='ie=edge' />
     <title>Space Yam`s Project Maker</title>
+
+    <script type="text/javascript" src="https://wurfl.io/wurfl.js"></script>
 </head>
 <body>
 <script>
+  let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
+  console.log(WURFL, navigator.userAgent, isMobile);
   const queryString = window.location.search;
-  location.href = `./plot.html${queryString}`;
+  //isMobile = true;
+  isMobile = WURFL.is_mobile;
+  if(!isMobile) location.href = `./plot.html${queryString}`;
+  else location.href = `./error/doesnt_supports_mobile_device.html`;
 </script>
 </body>
