@@ -105,9 +105,10 @@
         }
 
         label[for=imgUpload] {
+            display: inline;
             width: 100px;
-            margin: 17px 0;
-            padding: 8px 5px 5px 5px;
+            margin: 0 15px 0 0;
+            padding: 12px 12px 8px 8px;
             border: 1px solid black;
             border-radius: 10px;
             box-shadow: 2px 2px lightgrey;
@@ -123,6 +124,7 @@
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css' /> 
     <style>
         textarea {width:100%}
+        select {margin-top:15px}
     </style>
 </head>
 <body>
@@ -138,7 +140,12 @@
             <div>
                 1. convert image to base64
                 <input type='file' id='imgUpload' onchange='readFile(this)' style='display:none;'/>
+                <br/><br/>
                 <label for='imgUpload'>이미지 선택</label>
+                파일명: <span id='fileName'>&nbsp;-&nbsp;</span>
+                &nbsp;/&nbsp;
+                파일크기: <span id='fileSize'>&nbsp;-&nbsp;</span> byte
+                <br/><br/>
             </div>
             <label for='b64'></label>
             <textarea id='b64' rows='100' cols='135' placeholder='output for base64 converted from image'></textarea>
@@ -147,7 +154,14 @@
             </div>
             <br/>
                 2. convert base64 to image
-            <br/>
+            <div>
+                형식변환:&nbsp;&nbsp;
+                <select id='convertTo' >
+                    <option value='' >사용안함</option>
+                    <option value='jpeg' >.jpeg</option>
+                    <option value='png' >.png</option>
+                </select>
+            </div>
             <label for='fromB64'></label>
             <textarea id='fromB64' rows='100' cols='135' placeholder='enter a base64 to convert to image'
                     onblur='readBase64(this.value)'></textarea>
@@ -161,17 +175,36 @@
     </footer>
         
     <script>
-        function readFile(e) { console.log(e.files[0]);
-            if (!e.files || !e.files[0]) return;
-                const FR = new FileReader();
-                FR.onloadend = (evt)=>{ //console.log(evt.target);
-                    document.querySelector('#img').src       = evt.target.result;
-                    document.querySelector('#b64').innerHTML = evt.target.result;     
+        function readFile(e) {  
+            const tgfile = e.files[0]; console.log(tgfile); tgfile.type.includes('image')
+            if (!tgfile) return;
+            /* 
+            let valids = ['png', 'jpg', 'jpeg', 'png', 'gif', 'svg', 'webp', 'jfif']; 
+            valids = valids.concat(['avif', 'bmp', 'ico', 'cur', 'jpe', 'jps']);
+            const extention = (tgfile.name.split('.').pop()).toLowerCase();
+            if(!valids.includes(extention)) {
+                alert(`${valids.join(', ')} 파일만 선택해주세요ㅠ`); return;
+            }; */
+            if(!tgfile.type.includes('image')) { alert('이미지 파일이 아닙니다..'); return; }
+            if(tgfile.size<1) { alert('파일 크기가 0 byte인 파일입니다..'); return; }
+            document.getElementById('fileSize').innerHTML = String(tgfile.size);
+            document.getElementById('fileName').innerHTML = tgfile.name;
+
+            const FR = new FileReader();
+            FR.onloadend = (evt)=>{ //console.log(evt.target);
+                document.querySelector('#img').src       = evt.target.result;
+                document.querySelector('#b64').innerHTML = evt.target.result;     
             }; 
-            console.log('readAsDataURL:', FR.readAsDataURL(e.files[0]));
+            console.log('readAsDataURL:', FR.readAsDataURL(tgfile));
         }
-        function readBase64(base64) { 
-            document.querySelector('#toImg').src = base64;
+        function readBase64(base64Code) { 
+            if(base64Code==='') return; 
+            if(!base64Code.includes('data:image/')) { alert('적합한 base64 형식이 아닙니다.'); return; }
+            const convertTo = document.getElementById('convertTo').value;
+            const base64 = base64Code.split(';');
+            const imgSpec = (convertTo===''?base64[0]:`data:image/${convertTo}`); 
+            const imgUrl = `${imgSpec};${base64[1]}`; console.log('readBase64:', imgSpec, imgUrl);
+            document.querySelector('#toImg').src = imgUrl; 
         }
 
         const queryString = window.location.search;
