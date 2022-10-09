@@ -46,8 +46,10 @@
         "title": "기타 유틸",
         "route": "./convertBase64.html", 
         "subs": [
-            { "title": "이미지 base64로 변환", "route": "./convertBase64.html" }
+            { "title": "이미지 base64로 변환하기", "route": "./convertBase64.html" }
             ,{ "title": "JSON 보기 좋게 정렬하기", "route": "./prettifyJson.html" }
+            ,{ "title": "JWT 토큰 생성하기", "route": "./createJwtToken.html" }
+            ,{ "title": "URL의 QR코드 생성하기", "route": "./generateQrCode.html" }
         ]
     }
 }

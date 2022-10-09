@@ -81,6 +81,7 @@
         }
 
         .gradient {
+            font-weight: lighter;
             margin-bottom: 20px;font-size: 24pt;
             background-image: linear-gradient(90deg, rgba(94,114,235,1) 0%, rgba(255,145,144,1) 56%, rgba(254,193,149,1) 100%);
             color: transparent;
@@ -94,27 +95,18 @@
             }
         }
 
-        label {
-            cursor: pointer;
-        }
-
-        #imgUpload {
-            opacity: 0;
-            position: absolute;
-            z-index: -1;
-        }
-
-        label[for=imgUpload] {
-            width: 100px;
-            margin: 17px 0;
-            padding: 8px 5px 5px 5px;
+        #gradButton {
+            margin: 8px 0;
+            font-size: 10pt;
             border: 1px solid black;
             border-radius: 10px;
+            background-color: white;
             box-shadow: 2px 2px lightgrey;
+            cursor: pointer;
             text-align: center;
+            position: relative;
         }
-
-        label[for=imgUpload]:hover {
+        #gradButton:hover {
             color: Yellow;
             background-image: linear-gradient(140deg, #EADEDB 0%, #BC70A4 50%, #BFD641 75%);
             border: 1px solid transparent;
@@ -122,8 +114,10 @@
     </style>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css' /> 
     <style>
-        textarea {width:100%}
+        textarea {width:100%;}
     </style>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/hmac-sha256.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/enc-base64-min.js"></script>
 </head>
 <body>
     <embed type='text/html' src='./head.html' style='position:fixed;top:10px;right:0'/>
@@ -131,29 +125,20 @@
         <ol></ol>
     </aside>
     <section>
-        <p><h2 class='gradient'>이미지를 base64 코드로 변환하기</h2></p>
+        <p><h2 class='gradient'>JWT 토큰 생성하기(JSON 암호화)</h2></p>
         <div id=''></div>
         <div id=''></div>
         <div id='content1' class='content'>
-            <div>
-                1. convert image to base64
-                <input type="file" id="imgUpload" onchange="readFile(this)" style="display:none;"/>
-                <label for="imgUpload">이미지 선택</label>
-            </div>
-            <label for='b64'></label>
-            <textarea id='b64' rows='100' cols='135' placeholder='output for base64 converted from image'></textarea>
-            <div>
-                <img id='img' height='130px'>
-            </div>
-            <br/>
-                2. convert base64 to image
-            <br/>
-            <label for='fromB64'></label>
-            <textarea id='fromB64' rows='100' cols='135' placeholder='enter a base64 to convert to image'
-                    onblur='readBase64(this.value)'></textarea>
-            <div>
-                <img id='toImg' height='130px'>
-            </div>
+            <p>
+                create a JWT token
+            </p>
+            <div>header</div>
+            <textarea id='hjson' rows='100' cols='135' placeholder='enter a JSON String for JWT header'></textarea>
+            <div>payload</div>
+            <textarea id='pjson' rows='100' cols='135' placeholder='enter a JSON String for JWT payload'></textarea>
+            <input type="button" id="gradButton" value='변환하기' />
+            <pre id='prejson'>
+            </pre>
         </div>
     </section>
     <footer>
@@ -161,19 +146,33 @@
     </footer>
         
     <script>
-        function readFile(e) { console.log(e.files[0]);
-            if (!e.files || !e.files[0]) return;
-                const FR = new FileReader();
-                FR.onloadend = (evt)=>{ //console.log(evt.target);
-                    document.querySelector('#img').src       = evt.target.result;
-                    document.querySelector('#b64').innerHTML = evt.target.result;     
-            }; 
-            console.log('readAsDataURL:', FR.readAsDataURL(e.files[0]));
-        }
-        function readBase64(base64) { 
-            document.querySelector('#toImg').src = base64;
+        let header = { "alg": "HS256", "typ": "JWT" };
+        //header = CryptoJS.enc.Utf8.parse(JSON.stringify(header));
+        let payload = { "id": 1234, "name": "jonney" };
+        //payload = CryptoJS.enc.Utf8.parse(JSON.stringify(payload));
+
+        function base64url(tgData) {
+            encodedSource = CryptoJS.enc.Base64.stringify(tgData);
+            encodedSource = encodedSource.replace(/=+$/, '');
+            encodedSource = encodedSource.replace(/\+/g, '-');
+            encodedSource = encodedSource.replace(/\//g, '_');
+            
+            return encodedSource;
         }
 
+        function parseJwt (jwt, type) {
+            if(type===undefined) type = 1; 
+            if(type==='header') type = 0; 
+            var base64Url = jwt.split('.')[type]; console.log('parseJwt:', type, base64Url);
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(atob(base64).split('').map(
+                function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+
+            return JSON.parse(jsonPayload);
+        };
+        
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString).entries();
         let getParam = Object.fromEntries(urlParams); console.log('queryString:', getParam);
@@ -181,6 +180,40 @@
 
         window.onload = ()=>{
 
+            document.getElementById('hjson').value = JSON.stringify(header);
+            document.getElementById('pjson').value = JSON.stringify(payload);
+
+            document.getElementById('gradButton').addEventListener('click', 
+                (e)=>{
+                    header = document.getElementById('hjson').value;
+                    payload = document.getElementById('pjson').value; console.log('entered:', header, payload);
+                    if(!header) {
+                        alert('header 값이 입력되지 않았습니다.'); return;
+                    } 
+                    else if(!payload) {
+                        alert('payload 값이 입력되지 않았습니다.'); return;
+                    }
+                    else {
+                        const hcount = (header.match(/"/g) || []).length;
+                        const pcount = (payload.match(/"/g) || []).length;
+                        if(hcount<2 || hcount<2) { alert('값은 반드시 더블쿼테이션으로 감싸야합니다.'); return; }
+                    }
+                    if(typeof header==='string') data = JSON.parse(header); else data = header;
+                    if(typeof payload==='string') data = JSON.parse(payload); else data = payload;
+                
+                    header = CryptoJS.enc.Utf8.parse(JSON.stringify(header));
+                    payload = CryptoJS.enc.Utf8.parse(JSON.stringify(payload));
+                    const token = base64url(header) + "." + base64url(payload);
+                    const secretKey = "12345";
+                    let signed = CryptoJS.HmacSHA256(token, secretKey);
+                    signed = base64url(signed);
+
+                    document.getElementById('prejson').innerHTML = `Bearer ${token}`;
+                    console.log('payloadJWT(parsed, unparsed):', payload, parseJwt(token));
+                    console.log('headerJWT(parsed, unparsed):', header, parseJwt(token, 'header'));
+                    //console.log('signedJWT:', signed);
+                });
+                
             ajax_get('./data/routes.json', (data)=>{ console.log('menus:', data); //console.log(JSON.stringify(data, null, 4));
                 let menuobj = data, menulist;
                 menulist = Object.entries(menuobj); 
