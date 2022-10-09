@@ -52,7 +52,7 @@
         .commercial {color: grey;font-size: 20px;font-family: 'Lobster', sans-serif;}
         .commercial span {margin-left:5px;font-size: 12px;font-family: 'Slabo', sans-serif}
 
-        .portrait {left: 45%;bottom: 0px;height: 300px;position: absolute;}
+        .portrait {left: 45%;top: 470px;height: 300px;position: absolute;}
         #smile {height: 100%;position: absolute;}
         #talk {height: 100%;position: absolute;}
         #supur {height: 100%;position: absolute;}
@@ -80,6 +80,9 @@
         #gameover2 .topword {text-shadow: 0px 20px 50px gray;font-size: 24pt;width: 420px;position: absolute;}
         #gameover2 .btmword {text-shadow: 0px 20px 50px gray;font-size: 85pt;top: 150px;width: 500px;position: absolute;}
         #gameover2 .gofront {text-shadow: 0px 20px 50px gray;font-size: 30pt;cursor: pointer;top: 410px;left: 60px;width: 300px;position: absolute;}
+
+        #audioStatus {width: 50px;font-size: 10pt;right: 0;top: 60px;color: lime;position: fixed;}
+        #audioStatus span {}
 
         .gwanlamga {
             bottom: -35px;
@@ -167,7 +170,7 @@
     <style>
         .bubble {
             position: absolute;
-            bottom: 295px;
+            top: 295px;
             left: 57%;
             font-family: sans-serif;
             font-size: 18px;
@@ -294,6 +297,7 @@
             }
         }
     </style>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
 </head>
 <body>
     <div id='root'></div>
@@ -312,19 +316,26 @@
                 ,pathname2 = pathname[pathname.length-1];
             console.log('pathInfo:',loc,url,path1,path2); 
             useEffect(()=>{
-                var bgm = document.createElement('iframe');
+                /* */
+                const bgm = document.createElement('iframe');
+                bgm.id = 'audio';
                 bgm.style.width = '300px';
                 bgm.style.height = '300px';
                 bgm.src = 'https://www.youtube.com/embed/zyXmsVwZqX4?autoplay=1';
-                document.getElementById('bgm').appendChild(bgm);
+                document.getElementById('bgmFrame').appendChild(bgm); 
+                let iframeDoc = bgm.contentDocument || bgm.contentWindow.document; console.log('iframeDoc:', iframeDoc);
+                //iframeDoc.body.onclick = ()=>{ alert("iframe clicked"); };
 
                 //document.querySelector('iframe').contentWindow.document.querySelector('#player').click();
-                bgm.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                //bgm.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
             },[])
             return (
-            <div className='App'>
-                <div style={{top:'10px',right:'0',width:'59px',height:'48px',borderRadius:'18px',overflow:'hidden',position:'absolute'}}>
-                    <div id='bgm' style={{position:'absolute',top:'-250px',left:'-8px'}}>
+            <div className='App' style={{minWidth:'1000px', minHeight:'500px'}}>
+                <div style={{top:'10px',right:'0',width:'59px',height:'48px',borderRadius:'18px',zIndex:2,overflow:'hidden',position:'absolute'}}>
+                    <div id='audioStatus'>Click here to play music<span className='toggle'></span></div>
+                    <div id='bgmFrame' style={{position:'absolute',top:'-250px',left:'-8px'}}>
+                        {/* 
+                        <iframe id='audio' src='https://www.youtube.com/embed/zyXmsVwZqX4?autoplay=1' width='300px' height='300px'/> */}
                     </div>
                 </div>
                 <ReactRouterDOM.HashRouter history={browserHistory}>
