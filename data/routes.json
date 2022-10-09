@@ -3,7 +3,7 @@
         "title": "Intro",
         "route": "./index.html", 
         "subs": [
-            { "title": "성향 알아보기", "route": "./index.html" }
+            { "title": "프로젝트 방향성 살피기", "route": "./index.html" }
         ]
     },
     "content2": {
