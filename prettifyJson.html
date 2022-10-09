@@ -98,7 +98,7 @@
     <style>
         textarea {width:100%;margin:20px 0}
     </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
 </head>
 <body>
     
@@ -132,7 +132,7 @@
             let data; 
             $.ajax({
                 url: 'https://jsonplaceholder.typicode.com/users/1',
-                dataType: "json",
+                dataType: 'json',
                 complete: (resData)=>{
                     data = resData.responseJSON; console.log('complete:', resData, JSON.stringify(data, null, 0));
                     //data = resData.responseText; console.log('complete:', resData, data);
@@ -147,7 +147,7 @@
                                 if(count<2) { alert('값은 반드시 더블쿼테이션으로 감싸야합니다.'); return; }
                             }
                             if(typeof e.target.value==='string') data = JSON.parse(e.target.value); else data = e.target.value;
-                            const type1 = JSON.stringify(data, null, "\t");
+                            const type1 = JSON.stringify(data, null, '\t');
                             const type2 = JSON.stringify(data, null, 4);
                             document.getElementById('pjson').innerHTML = type2;
                         });

@@ -115,9 +115,12 @@
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css' /> 
     <style>
         textarea {width:100%;}
+        pre { margin: 15px 0;}
+        #prejson1 { margin: 40px 0; }
+        #jwtToken {width: 100%;}
     </style>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/hmac-sha256.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/enc-base64-min.js"></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/hmac-sha256.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/enc-base64-min.js'></script>
 </head>
 <body>
     <embed type='text/html' src='./head.html' style='position:fixed;top:10px;right:0'/>
@@ -136,8 +139,14 @@
             <textarea id='hjson' rows='100' cols='135' placeholder='enter a JSON String for JWT header'></textarea>
             <div>payload</div>
             <textarea id='pjson' rows='100' cols='135' placeholder='enter a JSON String for JWT payload'></textarea>
-            <input type="button" id="gradButton" value='변환하기' />
-            <pre id='prejson'>
+            <input type='button' id='gradButton' value='변환하기' />
+            <pre id='prejson1'>
+            </pre>
+            <p>
+                decode a JWT token
+            </p>
+            <input type='text' id='jwtToken' placeholder='enter a JWTtoken for decode'/>
+            <pre id='prejson2'>
             </pre>
         </div>
     </section>
@@ -203,15 +212,32 @@
                 
                     header = CryptoJS.enc.Utf8.parse(JSON.stringify(header));
                     payload = CryptoJS.enc.Utf8.parse(JSON.stringify(payload));
-                    const token = base64url(header) + "." + base64url(payload);
-                    const secretKey = "12345";
+                    const token = base64url(header) + '.' + base64url(payload);
+                    const secretKey = '12345';
                     let signed = CryptoJS.HmacSHA256(token, secretKey);
                     signed = base64url(signed);
 
-                    document.getElementById('prejson').innerHTML = `Bearer ${token}`;
+                    document.getElementById('prejson1').innerHTML = `Bearer ${token}`;
                     console.log('payloadJWT(parsed, unparsed):', payload, parseJwt(token));
                     console.log('headerJWT(parsed, unparsed):', header, parseJwt(token, 'header'));
                     //console.log('signedJWT:', signed);
+                });
+
+            document.getElementById('jwtToken').addEventListener('blur', 
+                (e)=>{ console.log('entered:', e.target.value);
+                    let jwtToken = e.target.value;
+                    if(!jwtToken) {
+                        alert('token 값이 입력되지 않았습니다.'); return;
+                    } 
+                    let orignHeader = parseJwt(jwtToken, 'header');
+                    orignHeader = JSON.stringify(JSON.parse(parseJwt(jwtToken, 'header'), null, 4));
+                    let orignPayload = parseJwt(jwtToken);
+                    //orignPayload = JSON.stringify(JSON.parse(parseJwt(jwtToken)), null, 4);
+                    document.getElementById('prejson2').innerHTML = `
+                        header: ${orignHeader} ,
+
+                        payload: ${orignPayload}
+                    `;
                 });
                 
             ajax_get('./data/routes.json', (data)=>{ console.log('menus:', data); //console.log(JSON.stringify(data, null, 4));
