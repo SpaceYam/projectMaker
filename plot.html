@@ -81,8 +81,10 @@
         #gameover2 .btmword {text-shadow: 0px 20px 50px gray;font-size: 85pt;top: 150px;width: 500px;position: absolute;}
         #gameover2 .gofront {text-shadow: 0px 20px 50px gray;font-size: 30pt;cursor: pointer;top: 410px;left: 60px;width: 300px;position: absolute;}
 
+        #audioBox {top:10px;right:0;width:59px;height:48px;border-radius:18px;z-index:2;overflow:hidden;position:absolute}
         #audioStatus {width: 50px;font-size: 10pt;right: 0;top: 60px;color: lime;position: fixed;}
-        #audioStatus span {}
+        audio {position: absolute;left: -15px;}
+        source {}
 
         .gwanlamga {
             bottom: -35px;
@@ -316,27 +318,42 @@
                 ,pathname2 = pathname[pathname.length-1];
             console.log('pathInfo:',loc,url,path1,path2); 
             useEffect(()=>{
-                /* */
+                /* 
                 const bgm = document.createElement('iframe');
                 bgm.id = 'audio';
                 bgm.style.width = '300px';
                 bgm.style.height = '300px';
                 bgm.src = 'https://www.youtube.com/embed/zyXmsVwZqX4?autoplay=1';
                 document.getElementById('bgmFrame').appendChild(bgm); 
-                let iframeDoc = bgm.contentDocument || bgm.contentWindow.document; console.log('iframeDoc:', iframeDoc);
+                let iframeDoc = bgm.contentDocument || bgm.contentWindow.document; console.log('iframeDoc:', iframeDoc);*/
                 //iframeDoc.body.onclick = ()=>{ alert("iframe clicked"); };
 
                 //document.querySelector('iframe').contentWindow.document.querySelector('#player').click();
                 //bgm.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
             },[])
+
+            function toggleAudioStatus(onOff) {
+                if(onOff==='Off') {
+                    document.querySelector("#audioStatus .toggle").innerHTML = 'Off';
+                    document.querySelector("#audioStatus").style.color = 'red';
+                }
+                else {
+                    document.querySelector("#audioStatus .toggle").innerHTML = 'On';
+                    document.querySelector("#audioStatus").style.color = 'lime';
+                }
+            }
+
             return (
             <div className='App' style={{minWidth:'1000px', minHeight:'500px'}}>
-                <div style={{top:'10px',right:'0',width:'59px',height:'48px',borderRadius:'18px',zIndex:2,overflow:'hidden',position:'absolute'}}>
-                    <div id='audioStatus'>Click here to play music<span className='toggle'></span></div>
-                    <div id='bgmFrame' style={{position:'absolute',top:'-250px',left:'-8px'}}>
-                        {/* 
-                        <iframe id='audio' src='https://www.youtube.com/embed/zyXmsVwZqX4?autoplay=1' width='300px' height='300px'/> */}
-                    </div>
+                <div id='audioBox' >
+                    <div style={{position:'absolute',zIndex:1,width:'300px',height:'50px',display:'none'}} 
+                        onclick={()=>{ alert("hi"); }} ></div>
+                    <div id='audioStatus'>Music <span className='toggle'>On</span></div>
+                    <audio id='audio' controls controlsList='nodownload' loop='true' autoplay='autoplay'
+                           onPlay={()=>{ toggleAudioStatus('On') }} onPause={()=>{ toggleAudioStatus('Off') }}>
+                        <source src='https://docs.google.com/uc?export=open&id=1r1xHsuzbimPiukIDSKrEJRZ9-Tn9JVKI' type='audio/mp3' />
+                    </audio>
+                    <div id='bgmFrame' style={{position:'absolute',top:'-250px',left:'-8px'}}></div>
                 </div>
                 <ReactRouterDOM.HashRouter history={browserHistory}>
                     <Switch>
