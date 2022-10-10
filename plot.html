@@ -82,7 +82,7 @@
         #gameover2 .gofront {text-shadow: 0px 20px 50px gray;font-size: 30pt;cursor: pointer;top: 410px;left: 60px;width: 300px;position: absolute;}
 
         #audioBox {top:10px;right:0;width:59px;height:48px;border-radius:18px;z-index:2;overflow:hidden;position:absolute}
-        #audioStatus {width: 50px;font-size: 10pt;right: 0;top: 60px;color: lime;position: fixed;}
+        #audioStatus {width: 50px;font-size: 10pt;right: 0;top: 60px;color: #7393B3;position: fixed;}
         audio {position: absolute;left: -15px;}
         source {}
 
@@ -335,7 +335,7 @@
             function toggleAudioStatus(onOff) {
                 if(onOff==='Off') {
                     document.querySelector("#audioStatus .toggle").innerHTML = 'Off';
-                    document.querySelector("#audioStatus").style.color = 'red';
+                    document.querySelector("#audioStatus").style.color = '#FF5733';
                 }
                 else {
                     document.querySelector("#audioStatus .toggle").innerHTML = 'On';
