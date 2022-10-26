@@ -81,7 +81,6 @@
         }
 
         .gradient {
-            font-weight: lighter;
             margin-bottom: 20px;font-size: 24pt;
             background-image: linear-gradient(90deg, rgba(94,114,235,1) 0%, rgba(255,145,144,1) 56%, rgba(254,193,149,1) 100%);
             color: transparent;
@@ -95,24 +94,110 @@
             }
         }
     </style>
-    <style></style>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css' /> 
+    <style>
+        input[name=gitRepoIpt] {width:44%;}
+        .forSub {border:none;width:50%;font-size:8pt;padding:3px;}
+        span[name=branchNmOpt] {font-weight:bold;font-size:10pt;}
+        span[name=originNmOpt] {font-size:10pt;}
+    </style>
 </head>
 <body>
-    <embed type='text/html' src='./head.html' style='position:fixed;top:10px;right:0'/>
-    <aside>
-        <ol></ol>
-    </aside>
-    <section>
-        <p><h2 class='gradient'>프로젝트 배포하기</h2></p>
-        <div id=''></div>
-        <div id=''></div>
-        <div id='content1' class='content'></div>
-    </section>
-    <footer>
-        by Space Yam
-    </footer>
+
+<embed type='text/html' src='./head.html' style='position:fixed;top:10px;right:0'/>
+<aside>
+    <ol></ol>
+</aside>
+
+<section>
+<p><h2 class='gradient'>GIT CLI의 활용</h2></p>
+<div id=''></div>
+<div id=''></div>
+<div id='content1' class='content'>
+1. 입력창에 작업한 브랜치를 입력하고, 다음 필요에 따라 다음 CLI들을 활용할 수 있습니다.
+&nbsp; 
+<input name='gitRepoIpt' type='text' oninput='setBranch(this.value)' placeholder="브랜치명을 입력하세요"/> 
+<input name='gitRepoIpt' type='text' oninput='setOrigin(this.value)' placeholder="origin명을 입력하세요" disabled/> 
+<pre>
+<span style='color:lightgray;font-size:4pt;'>
+- REPO 클론
+git clone <input class="forSub" value=' [REPO_URL]   [DIR]'/> 
+npm install
+git pull origin <span name='originNmOpt'>develop</span> --rebase   
+git push origin <span name='originNmOpt'>develop</span>         
+
+- 스테이징 및 커밋
+git status
+git add -A 
+또는 git add <input class="forSub" value=' images/logo.png   ./NewFolder/'/>   
+git commit -m <input class="forSub" value=' "feat: images/logo.png, files in NewFolder update"'/> 
+</span>
+- (로컬 커밋 후) 원격 브랜치에 푸시
+git push origin <span name='branchNmOpt'></span>
+
+- origin 풀 받기
+git checkout <span name='originNmOpt'>develop</span>
+git pull
+
+- 브랜치에서 origin 머지
+git checkout <span name='branchNmOpt'></span>
+git merge <span name='originNmOpt'>develop</span>
+
+- origin에서 브랜치 머지
+git checkout <span name='originNmOpt'>develop</span>
+git merge <span name='branchNmOpt'></span>
+git push (origin) 
+<span style='color:lightgray;font-size:4pt;'>
+- 브랜치 현황보기:    git branch -vva
+</span>
+- 로컬 브랜치 제거:   git branch -d <span name='branchNmOpt'></span>
+- 원격 브랜치 제거:   git push origin --delete <span name='branchNmOpt'></span>
+
+</pre>
+
+2. 깃 컨플릭 해결
+<pre>
+- 상태확인:           git status
+- 수정 후 스테이징:   git add .
+  (파일추가 시:       git add <input class="forSub" value=' README.md'/>   )
+  (파일제거 시:       git rm <input class="forSub" value=' README.md'/> )
+- 커밋:               git commit -m <input class="forSub" value=' "resolved merge conflict"'/>  
+
+</pre>
+
+3. VSCode 형상관리:
+<div>- 클론:</div>
+<img height="180" src='https://code.visualstudio.com/assets/docs/sourcecontrol/overview/firstrun-source-control.png' />
+<div>- 브랜치 생성:</div>
+<img height="180" src='https://code.visualstudio.com/assets/docs/sourcecontrol/overview/gitbranches.png' />
+<div>- 커밋:</div>
+<img height="220" src='https://code.visualstudio.com/assets/docs/sourcecontrol/overview/stage-changes.png' />
+<div>- 타임라인 보기:</div>
+<img height="220" src='https://code.visualstudio.com/assets/docs/sourcecontrol/overview/timeline-view.png' />
+<div>- 브랜치 삭제 (Ctrl+Shift+P > git del b):</div>
+<img height="180" src='https://i0.wp.com/dumbitdude.com/wp-content/uploads/2019/12/delete.png' />
+
+</div>
+</section>
+
+<footer>
+    by Space Yam
+</footer>
         
     <script>
+      
+        function setBranch(branchNm) {
+            [...document.querySelectorAll('span[name=branchNmOpt]')].map((itm)=>{
+                itm.innerHTML = branchNm;
+            });
+        }
+
+        function setOrigin(originNm) {
+            [...document.querySelectorAll('span[name=originNmOpt]')].map((itm)=>{
+                itm.innerHTML = originNm;
+            });
+        }
+
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString).entries();
         let getParam = Object.fromEntries(urlParams); console.log('queryString:', getParam);
@@ -120,11 +205,13 @@
 
         window.onload = ()=>{
 
+            setBranch("[브랜치명을 입력하세요]");
+
             ajax_get('./data/routes.json', (data)=>{ console.log('menus:', data); //console.log(JSON.stringify(data, null, 4));
                 let menuobj = data, menulist;
                 menulist = Object.entries(menuobj); 
                 menulist.map((itm, idx)=>{ 
-                    const key = itm[0], value = itm[1]; //console.log('menu:', key, value);
+                    const key = itm[0], value = itm[1]; console.log('menu:', key, value);
                     if(String(getParam.site)==='static' && String(value.title)==='BE') {}
                     else {
                         document.querySelector('aside ol').innerHTML+=`

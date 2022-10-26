@@ -3,43 +3,44 @@
         "title": "Intro",
         "route": "./index.html", 
         "subs": [
-            { "title": "프로젝트 방향성 살피기", "route": "./index.html" }
+            { "order":"1", "title": "프로젝트 방향성 살피기", "route": "./index.html" }
         ]
     },
     "content2": {
         "title": "FE",
         "route": "./decideCssf.html", 
         "subs": [
-            { "title": "CSS 프레임워크 정하기", "route": "./decideCssf.html" }
-            ,{ "title": "HTML 레이아웃 정하기", "route": "./decideLayout.html" }
+            { "order":"2", "title": "CSS 프레임워크 정하기", "route": "./decideCssf.html" }
+            ,{ "order":"3", "title": "HTML 레이아웃 정하기", "route": "./decideLayout.html" }
         ]
     },
     "content3": {
         "title": "BE",
         "route": "./configureBE.html", 
         "subs": [
-            { "title": "BE 생성하기", "route": "./configureBE.html" }
+            { "order":"4", "title": "BE 생성하기", "route": "./configureBE.html" }
         ]
     },
     "content4": {
         "title": "형상관리",
         "route": "./uploadToGit.html", 
         "subs": [
-            { "title": "FE/BE GIT에 올리기", "route": "./uploadToGit.html" }
+            { "order":"5-1", "title": "FE/BE GIT에 올리기", "route": "./uploadToGit.html" }
+            ,{ "order":"5-2", "title": "GIT CLI", "route": "./useGit.html" }
         ]
     },
     "content5": {
         "title": "배포",
         "route": "./deployProject.html", 
         "subs": [
-            { "title": "프로젝트 배포하기", "route": "./deployProject.html" }
+            { "order":"6", "title": "프로젝트 배포하기", "route": "./deployProject.html" }
         ]
     },
     "content6": {
         "title": "서비스 구체화하기",
         "route": "./defineDetails.html", 
         "subs": [
-            { "title": "프로젝트 명세 정리", "route": "./defineDetails.html" }
+            { "order":"7", "title": "프로젝트 명세 정리", "route": "./defineDetails.html" }
         ]
     },
     "content7": {
