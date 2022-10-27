@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='ie=edge' />
+    <title>Space Yam`s Project Maker</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Nanum Gothic'>
+    <style>
+
+        @media (max-width: 575px) {
+        }
+        @media (min-width: 576px) {
+        }
+        @media (min-width: 768px) {
+        }
+        @media (min-width: 992px) {
+        }
+        @media (min-width: 1200px) {
+        }
+
+        * {margin:0; padding:0;}
+        html, body {font-family: 'Nanum Gothic';background-color: white;width:100%;height:100%;}
+        header {height:50px}
+        nav {height:40px}
+        aside {min-width:220px !important;padding: 40px 30px !important;display:table-cell !important;}
+        section {height:700px !important;width:800px !important;padding: 5px 60px !important;display:table-cell !important;}
+        .content {min-height:300px;width:100%;border-radius:10px;margin:20px 0;padding: 20px 30px;} 
+        footer {padding:20px !important;height:100px !important;}
+    
+        header {background-color:white;box-shadow: inset 0 -10px 10px -10px rgb(0 0 0 / 15%);}
+        nav {background-color:white;box-shadow: rgba(0, 0, 0, 0.35) 0px -20px 36px -28px inset;}
+        aside {background-color:#f5f5dc;box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;}
+        section {background-color:white}
+        .content {background-color:white;box-shadow: rgba(0, 0, 0, 20%) 0px 4px 12px;} 
+        footer {color:white;background-color:#252222;box-shadow: inset 0px 15px 100px -10px grey}
+
+        header h2 {padding:5 30;color: gray;}
+        aside ol { list-style: none !important; text-align: left !important;list-style-position: inside !important; }
+        aside li { }
+
+        .depth1 { margin: 20px 0px;font-size:16pt; }
+        .depth2 ol li { margin: 5px 0px;font-size:10pt; }
+
+        #cssfs1, #content1 { max-width:700px }
+
+        /* CSS */
+        .button-13 {
+            margin: 5px;
+            background-color: #fff;
+            border: 1px solid #d5d9d9;
+            border-radius: 8px;
+            box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+            box-sizing: border-box;
+            color: #0f1111;
+            cursor: pointer;
+            display: inline-block;
+            font-family: 'Amazon Ember',sans-serif;
+            font-size: 13px;
+            line-height: 29px;
+            padding: 0 10px 0 11px;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: middle;
+            width: 100px;
+        }
+
+        .button-13:hover {
+            background-color: #f7fafa;
+        }
+
+        .button-13:focus {
+            border-color: #008296;
+            box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+            outline: 0;
+        }
+
+        .gradient {
+            margin-bottom: 20px;font-size: 24pt;
+            background-image: linear-gradient(90deg, rgba(94,114,235,1) 0%, rgba(255,145,144,1) 56%, rgba(254,193,149,1) 100%);
+            color: transparent;
+            -webkit-background-clip: text;
+            animation: move 1s infinite;
+        }
+
+        @keyframes move {
+            50% {
+                background-image: linear-gradient(262deg, rgba(94,114,235,1) 0%, rgba(255,145,144,1) 56%, rgba(254,193,149,1) 100%);
+            }
+        }
+    </style>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css' /> 
+    <style>
+        input[name=tableNmIpt] {width:35%;}
+        .w50 {width:50px;border:none;font-size:8pt;padding:3px;}
+        .w70 {width:70px;border:none;font-size:8pt;padding:3px;}
+        .w90 {width:90px;border:none;font-size:8pt;padding:3px;}
+    </style>
+</head>
+<body>
+
+<embed type='text/html' src='./head.html' style='position:fixed;top:10px;right:0'/>
+<aside>
+    <ol></ol>
+</aside>
+
+<section>
+<p><h2 class='gradient'>SQL 생성기(DCL, DDL)</h2></p>
+<div id=''></div>
+<div id=''></div>
+<div id='content1' class='content'>
+1. S(tructured)QL 생성
+<br/><br/>
+<input name='tableNmIpt' type='text' oninput='setTableNm(this.value)' placeholder="테이블명을 입력하세요"/> 
+<pre>
+<span style='color:lightgray;font-size:4pt;'>
+- 계정관리
+sqlplus / as <input class="w50" value=' sysdba '/> 
+CREATE USER <input class="w50" value=' user '/> IDENTIFIED BY <input class="w50" value=' pwd '/>;
+ALTER USER <input class="w50" value=' SCOTT '/> IDENTIFIED BY <input class="w50" value=' TIGER '/> ACCOUNT UNLOCK;
+USE <input class="w50" value=' mysql '/>; 
+CONN <input class="w50" value='user'/>/<input class="w50" value='pwd'/> 
+
+- DC(ontrol)L   
+권한부여: GRANT <input class="w50" value=' ALL '/> ON <input class="w50" value=' Sales '/>.<input name='tableNmOpt' class="w50" value=' Members '/> TO <input class="w50" value=' userid '/><input class="w50" value=' @host '/>;
+권한제거: REVOKE <input class="w50" value=' ALL '/> ON <input class="w50" value=' Sales '/>.<input name='tableNmOpt' class="w50" value=' Members '/> FROM <input class="w50" value=' userid '/><input class="w50" value=' @host '/>;
+</span><span style='color:lightgray;font-size:4pt;'>
+- DD(efinition)L
+테이블 생성: 
+  CREATE TABLE <input name='tableNmOpt' class="w90" value=' Members '/> (
+      <input class="w90" value=' member_id '/> <input class="w90" value=' NUMBER '/>,
+      <input class="w90" value=' member_pwd '/> <input class="w90" value=' VARCHAR(255) '/>,
+      <input class="w90" value=' register_date '/> <input class="w90" value=' DATE '/>,
+      <input class="w90" value=' use_yn '/> <input class="w90" value=' BOOLEAN '/>,
+  );
+
+컬럼 추가: ALTER TABLE <input name='tableNmOpt' class="w90" value=' Members '/> ADD COLUMN <input class="w90" value=' member_profile '/> <input class="w90" value=' TEXT '/> NOT NULL;
+컬럼 이름까지 변경: ALTER TABLE <input name='tableNmOpt' class="w90" value=' Members '/> CHANGE COLUMN <input class="w90" value=' register_date '/> <input class="w90" value=' member_code '/> <input class="w90" value=' BIGINT '/> NULL;
+컬럼 삭제: ALTER TABLE <input name='tableNmOpt' class="w90" value=' Members '/> DROP COLUMN <input class="w90" value=' member_code '/>;
+테이블 이름 변경: ALTER TABLE <input name='tableNmOpt' class="w90" value=' Members '/> RENAME <input class="w90" value=' Customers '/>;
+다수 테이블 이름 변경: 
+    RENAME TABLE <input class="w90" value=' Customers '/> TO <input class="w90" value=' Members '/>,
+                 <input class="w90" value=' Products '/> TO <input class="w90" value=' Goods '/>;
+테이블 데이터 전체 삭제: TRUNCATE TABLE <input name='tableNmOpt' class="w90" value=' Foo '/>;
+테이블 삭제: DROP TABLE <input name='tableNmOpt' class="w90" value=' Foo '/>;
+</span>
+변경사항 취소(DCL): ROLLBACK; 
+변경사항 확정(DCL): COMMIT; 
+<span style='color:lightgray;font-size:4pt;'>
+* 변경된 행은 COMMIT전에 LOCK되어 다른 사용자가 변경할 수 없다. commit이후 해제
+</span>
+
+- <a target='_blank' href="http://sqlfiddle.com/">SQL 연습</a>
+</pre>
+
+</div>
+</section>
+
+<footer>
+    by Space Yam
+</footer>
+        
+    <script>
+      
+        function setTableNm(tableNm) {
+            [...document.querySelectorAll('input[name=tableNmOpt]')].map((itm)=>{
+                itm.value = tableNm;
+            });
+        }
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString).entries();
+        let getParam = Object.fromEntries(urlParams); console.log('queryString:', getParam);
+        if(getParam.site===undefined) window.location.search = '?site=';
+
+        window.onload = ()=>{
+
+            ajax_get('./data/routes.json', (data)=>{ console.log('menus:', data); //console.log(JSON.stringify(data, null, 4));
+                let menuobj = data, menulist;
+                menulist = Object.entries(menuobj); 
+                menulist.map((itm, idx)=>{ 
+                    const key = itm[0], value = itm[1]; console.log('menu:', key, value);
+                    if(String(getParam.site)==='static' && String(value.title)==='BE') {}
+                    else {
+                        document.querySelector('aside ol').innerHTML+=`
+                            <li class='depth1'>${value.title})</li>
+                            <li class='depth2'>
+                                <ol>
+                                    ${value.subs.map((_itm, _idx)=>
+                                        String(`<li><a href='${_itm.route+queryString}'>
+                                            ${(!value.title.includes('기타')?_itm.order+'.':'*')} ${_itm.title}</a></li>`)
+                                    )}
+                                </ol>
+                            </li>
+                        `.replaceAll(',','');
+                    }
+                });
+            });
+        }
+
+        function ajax_get(url, callback) {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = ()=>{
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    //console.log('responseText:'+xmlhttp.responseText);
+                    try {
+                        var data = JSON.parse(xmlhttp.responseText);
+                    } catch(err) {
+                        //console.log(err.message+' in '+xmlhttp.responseText);
+                    }
+                    callback(data);
+                }
+            }; xmlhttp.open('GET', url, true); xmlhttp.send();
+        }
+        
+    </script>
+</body>
+</html>
