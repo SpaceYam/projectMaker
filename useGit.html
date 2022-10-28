@@ -98,6 +98,7 @@
     <style>
         input[name=gitRepoIpt] {width:44%;}
         .forSub {border:none;width:50%;font-size:8pt;padding:3px;}
+        #branchNmOpt {border:none;width:50%;font-weight:550;font-size:10pt;padding:3px;}
         span[name=branchNmOpt] {font-weight:bold;font-size:10pt;}
         span[name=originNmOpt] {font-size:10pt;}
     </style>
@@ -121,7 +122,7 @@
 <pre>
 <span style='color:lightgray;font-size:4pt;'>
 - REPO 클론
-git clone <input class="forSub" value=' [REPO_URL]   [DIR]'/> 
+git clone <input class="forSub" value=' [REPO_URL]  [WORKSPACE_DIR]'/> 
 npm install
 git pull origin <span name='originNmOpt'>develop</span> --rebase   
 git push origin <span name='originNmOpt'>develop</span>         
@@ -132,12 +133,16 @@ git add -A
 또는 git add <input class="forSub" value=' images/logo.png   ./NewFolder/'/>   
 git commit -m <input class="forSub" value=' "feat: images/logo.png, files in NewFolder update"'/> 
 </span>
+
+- 브랜치 생성
+git branch <input id='branchNmOpt' class="forSub" value=' feat/20221029_collaborator '/>
+
 - (로컬 커밋 후) 원격 브랜치에 푸시
 git push origin <span name='branchNmOpt'></span>
 
 - origin 풀 받기
 git checkout <span name='originNmOpt'>develop</span>
-git pull
+git pull 
 
 - 브랜치에서 origin 머지
 git checkout <span name='branchNmOpt'></span>
@@ -159,9 +164,11 @@ git push (origin)
 <pre>
 - 상태확인:           git status
 - 수정 후 스테이징:   git add .
-  (파일추가 시:       git add <input class="forSub" value=' README.md'/>   )
-  (파일제거 시:       git rm <input class="forSub" value=' README.md'/> )
-- 커밋:               git commit -m <input class="forSub" value=' "resolved merge conflict"'/>  
+  (특정 파일추가 시:  git add <input class="forSub" value=' conflictFile.md'/>   )
+  (특정 파일제거 시:  git rm <input class="forSub" value=' conflictFile.md'/> )
+- 커밋:              git commit -m <input class="forSub" value=' "resolved branch merge conflict"'/>  
+- 타임라인 확인:      git log --graph --decorate --oneline 
+         나가기: wq
 
 </pre>
 
@@ -186,7 +193,8 @@ git push (origin)
         
     <script>
       
-        function setBranch(branchNm) {
+        function setBranch(branchNm, skipId) {
+            if(skipId===undefined) document.getElementById('branchNmOpt').value = branchNm;
             [...document.querySelectorAll('span[name=branchNmOpt]')].map((itm)=>{
                 itm.innerHTML = branchNm;
             });
@@ -205,7 +213,7 @@ git push (origin)
 
         window.onload = ()=>{
 
-            setBranch("[브랜치명을 입력하세요]");
+            setBranch("[브랜치명을 입력하세요]", "skipId");
 
             ajax_get('./data/routes.json', (data)=>{ console.log('menus:', data); //console.log(JSON.stringify(data, null, 4));
                 let menuobj = data, menulist;
