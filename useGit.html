@@ -158,6 +158,13 @@ git push (origin)
 - 로컬 브랜치 제거:   git branch -d <span name='branchNmOpt'></span>
 - 원격 브랜치 제거:   git push origin --delete <span name='branchNmOpt'></span>
 
+- dev 머지 결과물, 브랜치에 동기화
+git checkout <span name='originNmOpt'>develop</span>
+git pull
+git checkout <span name='branchNmOpt'></span>
+git merge develop
+npm install
+
 </pre>
 
 2. 깃 컨플릭 해결
